@@ -1,0 +1,12 @@
+*.csv
+data
+*.pyc
+*.json
+db.sqlite3
+*.sqlite3
+settings.py
+album
+secret
+*.zip
+*.swp
+wsgi.py

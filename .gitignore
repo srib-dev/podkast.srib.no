@@ -1,0 +1,50 @@
+config.py
+*.pyc
+
+#### NO DATA. 
+# Let's not check in data to the source-code.
+# The request-cache module uses a sqlite file to store previously fetched urls.
+# .links files are (currently) used to store the links of the users. 
+# .maps = maps of a user
+# .permissions = sharing permissions on maps of a user.
+################
+*.sqlite
+*.links
+*.maps
+*.permissions
+__pycache__
+*.backup
+data
+*.csv
+data
+*.pyc
+*.json
+### DJANGO
+db.sqlite3
+*.sqlite3
+settings.py
+album
+secret
+*.zip
+*.swp
+wsgi.py
+
+
+#### NO SECRETS
+# Apikeys are sensitivy informations. Let's not include those.
+# And, as an additional note, use the filename format: "<service>.api-key.txt"
+# for future api-keys to future services.
+*.api-key.txt
+
+#### NO logs
+#
+*.log
+
+#### Visual Studios
+# Removing files/folders from visual studios solutions
+# that are not source code 
+.vs
+env
+*.pyproj
+*.sln
+/VPython*
