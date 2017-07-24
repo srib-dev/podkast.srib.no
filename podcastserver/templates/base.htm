@@ -1,0 +1,175 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>{% block title %}podkast.srib.no{% endblock %}</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {% block scripts %}
+
+    {% endblock %}
+
+    <style type="text/css">
+        body { 
+            margin: 0 auto;
+            text-align: center;
+            font-family: Montserrat, Helvetica, Arial, sans-serif;
+            
+        }
+
+        pre {
+            font-family: Montserrat, Helvetica, Arial, sans-serif;
+            text-align: left;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin: 0 auto;
+            margin-bottom: 2em;
+            margin-top: 4em;    
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 1em;
+            line-height:1.4em;
+        }
+
+        @font-face {
+            font-family: 'Montserrat';
+            src: url("{% static 'fonts/montserrat-regular-webfont.woff2' %}") format('woff2'),
+                 url("{% static 'fonts/montserrat-regular-webfont.woff' %}") format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+     
+
+
+        #content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        #description-wrapper {
+            text-align: center;
+            margin: 0 auto;
+        }
+        .paragraph {
+            margin: 0 auto;
+            text-align: left;
+            padding: 1em;
+            line-height: 1.3em;
+            max-width: 400px;
+        }
+
+        .item-wrapper {
+            margin: 1.5em;
+        }
+
+
+        #item-picture{
+            width: 200px;
+        }
+
+       
+        a { border: none; text-decoration: none; color: black;} 
+
+       
+        input[type=text] {
+            height: 2em;
+        }
+
+        
+
+
+        #footer {
+        clear: both;
+        display: block;
+        margin: 0 auto;
+        padding: 0;
+        position: relative;
+        background-color: #2f2f2f;
+        color: #a0a0a0;
+        z-index: 10;
+        min-height: 400px;
+        margin-top: 5em;
+        padding:1em;
+        }
+
+        .footer-cell {
+            max-width: 290px;
+            margin: 2em auto;
+            display: inline-block;
+            vertical-align: top;
+
+        }
+
+        .footer-cell p, .footer-cell h3 {
+            text-align: left;
+        }
+
+        #bannerholder {
+            background-image: url("{% static "gfx/banner.jpg" %}");
+            background-position: 50% 50%;
+            height: 40%;
+            min-height: 200px;
+            width: 100%;
+            background-repeat: no-repeat;
+            background-size: 100%;
+            
+        }
+
+
+        /* ------------------  Responsive Reulez ---------------------- */
+        @media screen and (min-width: 1024px) {
+            #bannerholder {
+                /*background-position: 0% 60%;*/
+                height: 40%;
+                min-height: 300px;
+            }
+        }
+
+        @media screen and (min-width: 1852px) {
+            #bannerholder {
+                /*background-position: 0% 60%;*/
+                height: 40%;
+                min-height: 350px;
+            }
+        }
+
+
+    </style>
+
+    {% block style %}
+    {% endblock %}
+</head>
+<body>
+    <div id="bannerholder"></div>
+    {% block navigation %}{% endblock navigation %}
+    <div id="content">
+        {% block content %}{% endblock content %}
+    </div>
+
+    <section id="footer">
+        <div id="footer-wrapper">
+            <div id="about" class="footer-cell">
+                <h3>About</h3>
+                <p>
+                podkast.srib.no - https://github.com/srib-dev/podkast.srib.no
+                Created by Robin G. Aaberg 2017.  Maintained by utviklingsgruppen @ srib.no
+                </p>
+            </div>
+
+            <div id="contact" class="footer-cell">
+                <h3>Contact</h3>
+                nettredaktor@srib.no
+            </div>
+            
+        </div>
+    </section>
+</body>
+</html>

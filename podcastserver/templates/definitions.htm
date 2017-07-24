@@ -1,0 +1,11 @@
+{% extends 'base.htm' %}
+{% load static %}
+
+{% block content %}
+<ul>
+{% for definition in definitions %}
+    <li> {{ definition.defnr }} - {{ definition.name }}</li>
+{% endfor %}
+</ul>
+
+{% endblock %}

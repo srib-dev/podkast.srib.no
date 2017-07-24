@@ -1,0 +1,19 @@
+{% extends 'base.htm' %}
+{% load static %}
+
+{% block content %}
+
+podcasts: {{ nr }}
+
+<table>
+<tr>
+    <th>PROGRAM</th> <th>TITLE</th> <th>AUTHOR</th> <th>CREATEDATE</th><th>SOFTDEL</th><th>DURATION</th><th>FILESIZE</th><th>FILENAME</th><th>REMARK</th>
+</tr>
+{% for podcast in podcasts %}
+    <tr>
+        <td>{{ podcast.program }}</td> <td>{{ podcast.title }}</td> <td>{{ podcast.author }}</td> <td>{{ podcast.createdate }}</td><td>{{ podcast.softdel }}</td><td>{{ podcast.duration }}</td><td>{{ podcast.filesize }}</td><td>{{ podcast.filename }}</td><td>{{ podcast.remark }}</td>
+    </tr>
+{% endfor %}
+</table>
+
+{% endblock %}
