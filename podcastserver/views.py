@@ -6,6 +6,11 @@ import pytz
 import datetime
 # Create your views here.
 
+
+def helenesofies(request, antall):
+    return HttpResponse("Helene " * int(antall) )
+
+
 def definitions(request):
     """ Lists all the programs from the definitino database.
 
@@ -21,7 +26,7 @@ def allpodcasts(request):
     program="Skumma Kultur"
     definition = Definition.objects.using('digas').get(name=program)
     programnr = definition.defnr
-    podcasts = DigasPodcast.objects.using('digas').filter(softdel=0, program=programnr).only('program', 'title', 'remark', 'author', 'createdate', 'filename', 'filesize', 'duration', 'softdel')[:50]
+    podcasts = DigasPodcast.objects.using('digas').filter(softdel=0, program=programnr).only('program', 'title', 'remark', 'author', 'createdate', 'broadcastdate', 'filename', 'filesize', 'duration', 'softdel')[:50]
     
     return render(request, 'podcasts.htm', dict(podcasts=podcasts, nr=len(podcasts)))
 
@@ -36,7 +41,7 @@ def rssfeed(request, programid):
     """
     podcasts = DigasPodcast.objects.using('digas').filter(softdel=0, 
         program=programid).only('program', 'title', 'remark', 'author', 
-            'createdate', 'filename', 'filesize', 'duration', 'softdel')
+            'createdate', 'broadcastdate', 'filename', 'filesize', 'duration', 'softdel')
     programinfo = ProgramInfo.objects.get(programid=int(programid))
 
     TIME_ZONE = pytz.timezone('Europe/Oslo')
@@ -66,8 +71,14 @@ def rssfeed(request, programid):
         title="Ensomhet i kunsten",
         media=Media(
             "http://srib.no/ensomhet.mp3", 1734734774),
-        summary="Hva er ensomhet? I studio var Samantha Hatten og han med Barten. Med gjest Daniel Katten")
+        summary="Hva er ensomhet? I studio var Samantha Hatten og han med Barten. Med gjest Daniel Katten"),
+    Episode(
+        title="Studentene kjeder seg",
+        media=Media(
+            "http://srib.no/kjedsomhet.mp3", 1734734774),
+        summary="Hvorfor kjeder studentene seg?  - med gjest Gaute Grøtta Grav")
     ]
+
 
     rss = str(p)
     return HttpResponse(rss, content_type='application/xml')

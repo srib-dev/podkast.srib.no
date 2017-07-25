@@ -24,6 +24,7 @@ from podcastserver.views import *
 urlpatterns = [
     url(r'^defs', definitions),
     url(r'^bloat', allpodcasts),
+    url(r'^helenesofies=(\d+)', helenesofies),
     url(r'^feed/(\d+)', rssfeed),
 ]
 

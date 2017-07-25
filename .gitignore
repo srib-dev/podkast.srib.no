@@ -29,6 +29,12 @@ secret
 *.swp
 wsgi.py
 
+# Sublime Text specific
+*.sublime-workspace
+
+# technocake specific
+.workonit
+sshtunnel.sh
 
 #### NO SECRETS
 # Apikeys are sensitivy informations. Let's not include those.
