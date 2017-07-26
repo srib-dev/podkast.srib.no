@@ -29,10 +29,10 @@ secret
 *.swp
 wsgi.py
 
-# Sublime Text specific
+#### Sublime Text specific
 *.sublime-workspace
 
-# technocake specific
+#### technocake specific
 .workonit
 sshtunnel.sh
 

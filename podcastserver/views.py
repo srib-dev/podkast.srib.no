@@ -2,14 +2,8 @@ from django.shortcuts import render
 from .models import Definition, DigasPodcast, ProgramInfo
 from django.http import HttpResponse, JsonResponse
 from podgen import Podcast, Episode, Media, Category, Person
-import pytz
-import datetime
+from .util import mp3url, digas2pubdate, guid, feed_url
 # Create your views here.
-
-
-def helenesofies(request, antall):
-    return HttpResponse("Helene " * int(antall) )
-
 
 def definitions(request):
     """ Lists all the programs from the definitino database.
@@ -40,44 +34,43 @@ def rssfeed(request, programid):
     3. Uses podgen to do the actual XML-generation.
     """
     podcasts = DigasPodcast.objects.using('digas').filter(softdel=0, 
-        program=programid).only('program', 'title', 'remark', 'author', 
-            'createdate', 'broadcastdate', 'filename', 'filesize', 'duration', 'softdel')
+        program=int(programid)).only('program', 'title', 'remark', 'author', 
+            'createdate', 'broadcastdate', 'filename', 'filesize', 
+            'duration', 'softdel').order_by('-createdate')
     programinfo = ProgramInfo.objects.get(programid=int(programid))
 
-    TIME_ZONE = pytz.timezone('Europe/Oslo')
+
     owner = Person("Studentradion i Bergen", "kontakt@srib.no")
 
     p = Podcast(
-        name=programinfo.name,
-        subtitle=programinfo.subtitle,
-        description=programinfo.description,
-        website=programinfo.website,
-        explicit=programinfo.explicit,
-        category=Category(programinfo.category),
-        authors=[Person("Skumma Kultur", "ansvarlig.redaktor@srib.no")],
-        language=programinfo.language,
-        owner=owner)
+        name = programinfo.name,
+        subtitle = programinfo.subtitle,
+        description = programinfo.description,
+        website = programinfo.website,
+        explicit = programinfo.explicit,
+        category = Category(programinfo.category),
+        authors = [Person("Skumma Kultur", "ansvarlig.redaktor@srib.no")],
+        language = programinfo.language,
+        owner = owner,
+        feed_url = feed_url(programid),
+        new_feed_url = feed_url(programid),
+        )
 
-    p.episodes += [
-    Episode(
-        title="BDSM",
-        media=Media(
-            "http://srib.no/bdsm.mp3", 19238194),
-        summary="Hvordan bruke bdsm i studio",
-        publication_date=datetime.datetime(
-            2017, 7, 21, 17, 18, tzinfo=TIME_ZONE)
-    ),
-    Episode(
-        title="Ensomhet i kunsten",
-        media=Media(
-            "http://srib.no/ensomhet.mp3", 1734734774),
-        summary="Hva er ensomhet? I studio var Samantha Hatten og han med Barten. Med gjest Daniel Katten"),
-    Episode(
-        title="Studentene kjeder seg",
-        media=Media(
-            "http://srib.no/kjedsomhet.mp3", 1734734774),
-        summary="Hvorfor kjeder studentene seg?  - med gjest Gaute Grøtta Grav")
-    ]
+    for episode in podcasts:
+        # Get pubdate from createdate or broadcastdate
+        pubdate = digas2pubdate( episode.createdate, 
+                                 episode.broadcastdate )
+        # Add the episode to the list
+        p.episodes.append(
+                Episode(
+                    title=episode.title,
+                    media=Media(mp3url(episode.filename), episode.filesize),
+                    id=guid(episode.filename),
+                    summary=episode.remark,
+                    publication_date=pubdate
+                )
+        )
+
 
 
     rss = str(p)
