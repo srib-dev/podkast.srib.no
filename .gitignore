@@ -19,6 +19,7 @@ data
 data
 *.pyc
 *.json
+
 ### DJANGO
 db.sqlite3
 *.sqlite3
@@ -28,6 +29,7 @@ secret
 *.zip
 *.swp
 wsgi.py
+fixture
 
 #### Sublime Text specific
 *.sublime-workspace

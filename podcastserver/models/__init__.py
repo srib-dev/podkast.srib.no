@@ -9,6 +9,8 @@ That way manage.py makemigrations and manage.py migrate will
 work with them.
 """
 # Digas models
-from .digas import Definition, DigasPodcast
+from .digasmodels import Definition, DigasPodcast
 # podcastserver app models
-from .podcastserver import Person, ProgramInfo
+from .podcastmodels import Person, ProgramInfo
+
+from .globalsettings import GlobalOwner, owner

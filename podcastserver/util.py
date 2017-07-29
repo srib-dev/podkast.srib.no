@@ -115,3 +115,74 @@ def digas2pubdate(createdate, broadcastdate=0):
     return pubdate
 
 
+
+
+def convert_programinfo(oldfile, newfile):
+    """ Converts programinfo from the old server format to the new server format.
+
+    Basically, in the old java server, I did a json dump from phpmyadmin.
+    Then this script maps the fields from there to the fields in the ProgramInfo
+    model here.
+
+    Some fields are not present in the old db-table:
+        - explicit
+        - published
+        - owner
+        - author
+        - website
+        - language
+
+    So we add default values for these.
+    """
+
+    import json
+    old_table = json.load(open(oldfile, 'r'))
+    new_table = "["
+
+    program_template = """
+    {
+        "model": "podcastserver.programinfo", 
+        "pk": %(pk)d, 
+        "fields": {
+                "programid": %(programid)d, 
+                "name": "%(name)s", 
+                "subtitle": %(subtitle)s,
+                "description": %(description)s, 
+                "website": "http://srib.no", 
+                "explicit": false, 
+                "publish": false, 
+                "language": "nb", 
+                "category": "%(category)s", 
+                "image_url": "%(image_url)s", 
+                "owner": 1, 
+                "authors": [1]
+        }
+
+    }"""
+
+    clean=lambda s: '"%s"'%repr(s)[1:-1]
+    # long hack to just print escaped newlines
+    # and contain it with doubleqoutes.. Json doesn't support single quotes.
+
+    for pk, program in enumerate(old_table, 1):
+        #new field  --- mapped-- to old field
+        program['name'] = program['title']
+        program['subtitle'] = clean(program['subtitle'])
+        program['description'] = clean(program['description'])
+        program['image_url'] = program['imglink']
+        program['programid'] = int(program['program'])
+        program['pk'] = pk
+        
+        progstring = program_template % program
+        new_table += progstring + ","
+
+    # Remove last comma and add closing list bracket.
+    new_table = new_table[:-1] + "]"
+    # Save it.
+    with open(newfile, 'w+') as f:
+        f.write(new_table)
+
+
+
+if __name__ == '__main__':
+    convert_programinfo('/home/technocake/srib/system/podkast/server-remake/exported/PROGRAMINFO.json', 'fixtures/programinfo.json')
