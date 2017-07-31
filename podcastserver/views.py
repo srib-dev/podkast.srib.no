@@ -3,6 +3,7 @@ from .models import Definition, DigasPodcast, ProgramInfo
 from django.http import HttpResponse, JsonResponse
 from podgen import Podcast, Episode, Media, Category, Person
 from .util import mp3url, digas2pubdate, guid, feed_url
+from .models import globalsettings 
 # Create your views here.
 
 
@@ -49,8 +50,6 @@ def rssfeed(request, programid):
             'duration', 'softdel').order_by('-createdate')
     programinfo = ProgramInfo.objects.get(programid=int(programid))
 
-    from .models.globalsettings import owner
-
     p = Podcast(
         name=programinfo.name,
         subtitle=programinfo.subtitle,
@@ -60,7 +59,7 @@ def rssfeed(request, programid):
         category=Category(programinfo.category),
         authors=[Person("Skumma Kultur", "ansvarlig.redaktor@srib.no")],
         language=programinfo.language,
-        owner=owner,
+        owner=globalsettings.owner,
         feed_url=feed_url(programid),
         new_feed_url=feed_url(programid),
     )

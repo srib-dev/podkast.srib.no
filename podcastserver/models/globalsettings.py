@@ -7,25 +7,23 @@
     Global Settings for the server that will be stored in the db
     and can be edited through the website by staff/nettredaktor.
 
-    Using the django-dbsettings module:
-    docs: https://github.com/zlorf/django-dbsettings
+    Using the django-constance module to store config in db. 
+    Config can then be edited in the admin interface. 
 
+    https://django-constance.readthedocs.io/en/latest/
 """
-import dbsettings
 
+from constance import config
+from podgen import Person
 
-class GlobalOwner(dbsettings.Group):
-    """ Global eier til podcastene.
+owner = Person(name=config.OWNER_NAME,
+               email=config.OWNER_EMAIL)
+""" Standard eier til podcastene.
 
-    Brukes for å si til iTunes at vi eier dem."""
+Blir sendt til itunes via rss feeden.
+for å forandre eier gå til /admin i browseren under
+CONSTANCE.
 
-    name = dbsettings.StringValue(
-        'Navn på eieren til podcastene. Bør være Studentradioen i Bergen.',
-        default='Studentradioen i Bergen'
-    )
-    email = dbsettings.StringValue(
-        'Epost til eier. pleier være kontakt@srib.no',
-        default='kontakt@srib.no')
-
-
-owner = GlobalOwner()
+For å legge til flere globale config-variabler gå til
+settings.py og titt på CONSTANCE_CONFIG.
+"""
