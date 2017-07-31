@@ -57,7 +57,7 @@ def rssfeed(request, programid):
         website=programinfo.website,
         explicit=programinfo.explicit,
         category=Category(programinfo.category),
-        authors=[Person("Skumma Kultur", "ansvarlig.redaktor@srib.no")],
+        authors=[globalsettings.owner],
         language=programinfo.language,
         owner=globalsettings.owner,
         feed_url=feed_url(programid),
