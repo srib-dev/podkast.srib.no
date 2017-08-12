@@ -28,7 +28,6 @@ urlpatterns = [
     url(r'^feed/(\d+)', rssfeed, name='rssfeed'),
     url(r'^$', index, name='index'),
     url(r'^admin', srib_admin, name='srib_admin')
-
 ]
 
 
