@@ -8,7 +8,7 @@ from .models import globalsettings
 
 
 def index(request):
-    return HttpResponse('Hello World!')
+    return render(request, 'index.htm')
 
 def export_proginfo(request):
     from django.core import serializers
