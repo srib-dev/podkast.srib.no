@@ -7,6 +7,9 @@ from .models import globalsettings
 # Create your views here.
 
 
+def index(request):
+    return HttpResponse('Hello World!')
+
 def export_proginfo(request):
     from django.core import serializers
     data = serializers.serialize('json',
