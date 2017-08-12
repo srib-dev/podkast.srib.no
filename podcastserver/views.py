@@ -6,6 +6,8 @@ from .util import mp3url, digas2pubdate, guid, feed_url
 from .models import globalsettings 
 # Create your views here.
 
+def srib_admin(request):
+    return render(request, 'admin.htm')
 
 def index(request):
     return render(request, 'index.htm')
