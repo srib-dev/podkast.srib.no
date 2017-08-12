@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^export', export_proginfo),
     url(r'^bloat', allpodcasts),
     url(r'^feed/(\d+)', rssfeed, name='rssfeed'),
-    url(r'^', index, name='index'),
+    url(r'^$', index, name='index'),
 ]
 
 
