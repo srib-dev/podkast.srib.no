@@ -3,7 +3,7 @@ from .models import Definition, DigasPodcast, ProgramInfo
 from django.http import HttpResponse, JsonResponse
 from podgen import Podcast, Episode, Media, Category, Person
 from .util import mp3url, digas2pubdate, guid, feed_url
-from .models import globalsettings 
+
 # Create your views here.
 
 def srib_admin(request):
@@ -54,6 +54,12 @@ def rssfeed(request, programid):
             'createdate', 'broadcastdate', 'filename', 'filesize',
             'duration', 'softdel').order_by('-createdate')
     programinfo = ProgramInfo.objects.get(programid=int(programid))
+
+    # loading globalsettings here, and not at the module_level
+    # This way django won't explode because of missing
+    # constance_config table when we start on scratch
+    # or set up in a new environment.
+    from .models import globalsettings 
 
     p = Podcast(
         name=programinfo.name,
