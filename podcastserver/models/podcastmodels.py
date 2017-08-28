@@ -34,6 +34,9 @@ class Person(models.Model):
     name = models.CharField(max_length=128)
     email = models.EmailField(max_length=70, blank=True)
 
+    def __str__(self):
+        return self.name
+
 
 class ProgramInfo(models.Model):
     u"""Description: The info on a podcast.

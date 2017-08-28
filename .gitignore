@@ -29,7 +29,11 @@ secret
 *.zip
 *.swp
 wsgi.py
-fixture
+
+## Fixtures - dont push real data. only tull.json (mock data).
+fixture/*
+!fixture
+!fixture/tull.json
 
 #### Sublime Text specific
 *.sublime-workspace

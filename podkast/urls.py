@@ -40,7 +40,7 @@ urlpatterns = [
 # if turned off, no urls to the admin pages or the debug toolbar is added.
 if settings.ADMIN_ENABLED:
         urlpatterns = [
-            url(r'^admin/', admin.site.urls),
+            url(r'^djangoadmin/', admin.site.urls),
         ] + urlpatterns
 
 

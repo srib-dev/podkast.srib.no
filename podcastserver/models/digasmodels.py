@@ -31,6 +31,7 @@ class Definition(models.Model):
     class Meta:
         managed = False
         db_table = 'DEFINITION'
+        verbose_name = 'Digas DB: Defintion'
 
 
 class DigasPodcast(models.Model):
@@ -54,6 +55,11 @@ podcasts = DigasPodcast.objects.using('digas').filter(
 Don't worry about the monster code below. It's been automaticaly
 created with the command: `python manage.py inspectdb --database digas PODCAST`
 """
+    class Meta:
+        managed = False
+        db_table = 'PODCAST'
+        verbose_name = 'Digas DB: Podcast'
+
     refnr = models.IntegerField(db_column='REFNR', primary_key=True)  # Field name made lowercase.
     class_field = models.IntegerField(db_column='CLASS', blank=True, null=True)  # Field name made lowercase. Field renamed because it was a Python reserved word.
     title = models.CharField(db_column='TITLE', max_length=80, blank=True, null=True)  # Field name made lowercase.
@@ -148,6 +154,4 @@ created with the command: `python manage.py inspectdb --database digas PODCAST`
     mediumname = models.CharField(db_column='MEDIUMNAME', max_length=40, blank=True, null=True)  # Field name made lowercase.
     mediumcode = models.IntegerField(db_column='MEDIUMCODE', blank=True, null=True)  # Field name made lowercase.
 
-    class Meta:
-        managed = False
-        db_table = 'PODCAST'
+    

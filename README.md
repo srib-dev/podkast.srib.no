@@ -19,8 +19,19 @@ Disse stegene utføres for å sette opp et lokalt utviklignsmiljø for podkastse
 4. lag ny fil `settings.py` i podkast mappen med følgende innhold:
     ```
     from .base_settings import *
-    # Gjør kun dette lokalt på egen pc.
-    MANAGE_DIGAS_SCHEMA = True
+    # Gjør kun dette lokalt på egen pc. 
+    # Når vi jobber med en lokal juksedatabase.
+	# Aldri på den ekte digas databasen...
+    MANAGE_DIGAS_DB = True
+
+    # Nifty local admin interface for devs only.
+    # Accesible at [http://localhost:8000/djangoadmin](http://localhost:8000/djangoadmin)
+    # (vi har hijacket /admin til eget bruk.)
+    ADMIN_ENABLED = True
+
+    # Nyttig når vi utvikler lokalt. Ikke på den ekte servern (farlig).
+	DEBUG = True
+
     ```
 5. Få tak i  fixture filene fra Robin, legg dem i podcastserver/fixtures/
 4. Kjør ```./setup_dev_environment.sh```
