@@ -1,0 +1,40 @@
+[
+
+{
+  "model": "podcastserver.definition",
+  "pk": 1,
+  "fields": {
+    "section": null,
+    "flags": null,
+    "name": "S\u00f8ppel i Lokalet"
+  }
+},
+{
+  "model": "podcastserver.person",
+  "pk": 1,
+  "fields": {
+    "name": "Studentradioen i Bergen",
+    "email": "kontakt@srib.no"
+  }
+},
+{
+  "model": "podcastserver.programinfo",
+  "pk": 1,
+  "fields": {
+    "programid": 1,
+    "name": "S\u00f8ppel i Lokalet",
+    "subtitle": "tre stykk bananskall!",
+    "description": "Daglig leder er oppgitt over s\u00f8ppelet i lokalet.",
+    "website": "http://srib.no/soepel-i-lokalet",
+    "explicit": true,
+    "publish": true,
+    "language": "nb",
+    "category": "News & Politics",
+    "image_url": "http://www.wikihow.com/images/9/94/Use-Banana-Peels-Intro.jpg",
+    "owner": 1,
+    "authors": [
+      1
+    ]
+  }
+}
+]
