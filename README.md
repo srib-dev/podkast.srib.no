@@ -17,7 +17,7 @@ Disse stegene utføres for å sette opp et lokalt utviklignsmiljø for podkastse
 2. lag virtualenv: ```mkvirtualenv podkast```
 3. Installer dependencies: ```pip install -r requirements_dev.txt```
 4. lag ny fil `settings.py` i podkast mappen med følgende innhold:
-    ```
+    ```python
     from .base_settings import *
     # Gjør kun dette lokalt på egen pc. 
     # Når vi jobber med en lokal juksedatabase.
@@ -33,8 +33,11 @@ Disse stegene utføres for å sette opp et lokalt utviklignsmiljø for podkastse
 	DEBUG = True
 
     ```
-5. Få tak i  fixture filene fra Robin, legg dem i podcastserver/fixtures/
-4. Kjør ```./setup_dev_environment.sh```
+5. Kjør ```./setup_dev_environment.sh```
+
+6. Last inn tulledata ved hjelp av django sitt manage.py skript:
+	```python manage.py loaddata tull```
+
 
 
 ## Hello World Django
