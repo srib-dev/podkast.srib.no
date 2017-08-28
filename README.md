@@ -13,7 +13,7 @@ Disse stegene utføres for å sette opp et lokalt utviklignsmiljø for podkastse
 (Ikke kjør setupscriptet i produksjon!)
 
 
-1. ```git clone ...```
+1. ```git clone https://github.com/srib-dev/podkast.srib.no```
 2. lag virtualenv: ```mkvirtualenv podkast```
 3. Installer dependencies: ```pip install -r requirements_dev.txt```
 4. lag ny fil `settings.py` i podkast mappen med følgende innhold:
