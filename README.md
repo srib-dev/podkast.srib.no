@@ -39,6 +39,12 @@ Disse stegene utføres for å sette opp et lokalt utviklignsmiljø for podkastse
 	```python manage.py loaddata tull```
 
 
+# Start serveren (lokalt)
+For å kunne komme inn på podkastsidene lokalt bruker vi djangos innebygde httpserver. Da kjører den på din maskin, og vil kun være synlig og tilgjengelig for deg.
+
+1. ```python manage.py runserver```
+2. Gå til http://localhost:8000 i nettleseren. ;D"
+
 
 ## Hello World Django
 
