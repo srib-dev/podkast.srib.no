@@ -5,7 +5,12 @@
 
 <h1>Adminside</h1>
 
-<ul>Programmer</ul>
+<h2> Programmer </h2>
 
+{% for program in programs %}
+    <div style="background-color: #ccc; border: 1px solid black; display: inline-block; padding: 2em;">
+    <h3> {{ program.name }} </h3>
+    <p> program.description </p>
+{% endfor %}
 
 {% endblock %}

@@ -35,7 +35,12 @@ class Person(models.Model):
     email = models.EmailField(max_length=70, blank=True)
 
     def __str__(self):
-        return self.name
+        return u"%s" % self.name
+
+    # This makes django admin display øøå
+    def __unicode__(self):
+        return self.__str__()
+
 
 
 class ProgramInfo(models.Model):
@@ -99,4 +104,8 @@ class ProgramInfo(models.Model):
         Eksempel:
             <Podcast Skumma Kultur>
         """
-        return "%s" % self.name
+        return u"%s" % self.name
+
+    # This makes django admin display øøå
+    def __unicode__(self):
+        return self.__str__()

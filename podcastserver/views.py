@@ -7,16 +7,14 @@ from .util import mp3url, digas2pubdate, guid, feed_url
 # Create your views here.
 
 def srib_admin(request):
-    return render(request, 'admin.htm')
+    # Henter ut alle podcastprogrammer
+    programs = ProgramInfo.objects.all()
+    return render(request, 'admin.htm', dict(programs=programs))
+
 
 def index(request):
     return render(request, 'index.htm')
 
-def export_proginfo(request):
-    from django.core import serializers
-    data = serializers.serialize('json',
-        ProgramInfo.objects.all())
-    return HttpResponse(data, content_type="application/json")
 
 
 def definitions(request):
@@ -31,7 +29,7 @@ def definitions(request):
 def allpodcasts(request):
     """ Testing how long it takes to fetch ALL podcasts with ALL fields from digas.
     """
-    program="Skumma Kultur"
+    program = "Skumma Kultur"
     definition = Definition.objects.using('digas').get(name=program)
     programnr = definition.defnr
     podcasts = DigasPodcast.objects.using('digas').filter(softdel=0, program=programnr).only('program', 'title', 'remark', 'author', 'createdate', 'broadcastdate', 'filename', 'filesize', 'duration', 'softdel')[:50]
