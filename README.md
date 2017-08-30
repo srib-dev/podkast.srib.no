@@ -17,7 +17,8 @@ Disse stegene utføres for å sette opp et lokalt utviklignsmiljø for podkastse
 2. lag virtualenv: ```mkvirtualenv podkast```
 3. Installer dependencies: ```pip install -r requirements_dev.txt```
 4. lag ny fil `settings.py` i podkast mappen med følgende innhold:
-    ```python
+
+```python
 # -*- coding: utf-8 -*-
 
 from .base_settings import *
@@ -34,11 +35,11 @@ ADMIN_ENABLED = True
 # Nyttig når vi utvikler lokalt. Ikke på den ekte servern (farlig).
 DEBUG = True
 
-    ```
+```
 5. Kjør ```./setup_dev_environment.sh```
 
-6. Last inn tulledata ved hjelp av django sitt manage.py skript:
-	```python manage.py loaddata tull```
+6. Last inn tulledata:
+	```./load_tulle_data.sh```
 
 
 # Start serveren (lokalt)
