@@ -1,3 +1,11 @@
+# -*- coding: utf-8 -*-
+
+"""
+	admin.py: registrerer hvilke modeller som 
+		  skal være synlig i django admin.
+
+"""
+
 from django.contrib import admin
 from .models import Person, ProgramInfo, Definition, DigasPodcast
 from django.conf import settings

@@ -29,15 +29,21 @@ echo
 echo 
 echo
 echo " Lets create a superuser now."
-echo "Type in the admin account name below "
+echo " Type in the admin account name below "
 echo 
 echo 
 echo 
 python manage.py createsuperuser
-echo 
+echo
+echo    -------------------------------------------------------------------
+echo    ALMOST DONE 
+echo    ------------------------------------------------------------------- 
+echo
+echo
 echo " OK :). - And now you should load data into the local databases."
 echo
-echo  "kjør følgende kommando (neida, vi tuller ikke.)"
+echo "             ./load_tulle_data.sh"
 echo
-echo    "python manage.py loaddata tull"
-
+echo
+echo
+echo

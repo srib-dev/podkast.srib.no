@@ -59,7 +59,7 @@ def rssfeed(request, programid):
     # This way django won't explode because of missing
     # constance_config table when we start on scratch
     # or set up in a new environment.
-    from .models import globalsettings 
+    from .models import globalsettings
 
     p = Podcast(
         name=programinfo.name,
@@ -90,5 +90,5 @@ def rssfeed(request, programid):
             )
         )
 
-    rss = str(p)
+    rss = unicode(p)
     return HttpResponse(rss, content_type='application/xml')

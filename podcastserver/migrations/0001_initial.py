@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'DEFINITION',
-                'managed': settings.MANAGE_DIGAS_SCHEMA,
+                'managed': settings.MANAGE_DIGAS_DB,
             },
         ),
         migrations.CreateModel(
@@ -127,7 +127,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'PODCAST',
-                'managed': settings.MANAGE_DIGAS_SCHEMA,
+                'managed': settings.MANAGE_DIGAS_DB,
             },
         ),
     ]

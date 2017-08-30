@@ -32,7 +32,8 @@ wsgi.py
 
 ## Fixtures - dont push real data. only tull.json (mock data).
 fixtures/*
-!podcastserver/fixtures/tull.json
+!podcastserver/fixtures/digastull.json
+!podcastserver/fixtures/podcasttull.json
 
 #### Sublime Text specific
 *.sublime-workspace

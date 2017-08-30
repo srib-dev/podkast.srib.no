@@ -18,19 +18,21 @@ Disse stegene utføres for å sette opp et lokalt utviklignsmiljø for podkastse
 3. Installer dependencies: ```pip install -r requirements_dev.txt```
 4. lag ny fil `settings.py` i podkast mappen med følgende innhold:
     ```python
-    from .base_settings import *
-    # Gjør kun dette lokalt på egen pc. 
-    # Når vi jobber med en lokal juksedatabase.
-	# Aldri på den ekte digas databasen...
-    MANAGE_DIGAS_DB = True
+# -*- coding: utf-8 -*-
 
-    # Nifty local admin interface for devs only.
-    # Accesible at [http://localhost:8000/djangoadmin](http://localhost:8000/djangoadmin)
-    # (vi har hijacket /admin til eget bruk.)
-    ADMIN_ENABLED = True
+from .base_settings import *
+# Gjør kun dette lokalt på egen pc. 
+# Når vi jobber med en lokal juksedatabase.
+# Aldri på den ekte digas databasen...
+MANAGE_DIGAS_DB = True
 
-    # Nyttig når vi utvikler lokalt. Ikke på den ekte servern (farlig).
-	DEBUG = True
+# Nifty local admin interface for devs only.
+# Accesible at [http://localhost:8000/djangoadmin](http://localhost:8000/djangoadmin)
+# (vi har hijacket /admin til eget bruk.)
+ADMIN_ENABLED = True
+
+# Nyttig når vi utvikler lokalt. Ikke på den ekte servern (farlig).
+DEBUG = True
 
     ```
 5. Kjør ```./setup_dev_environment.sh```
