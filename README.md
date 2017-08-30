@@ -38,8 +38,8 @@ DEBUG = True
 ```
 5. Kjør ```./setup_dev_environment.sh```
 
-6. Last inn tulledata ved hjelp av django sitt manage.py skript:
-	```python manage.py loaddata tull```
+6. Last inn tulledata:
+	```./load_tulle_data.sh```
 
 
 # Start serveren (lokalt)
