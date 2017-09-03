@@ -11,6 +11,7 @@ Podkastjeneren bruker python. Det består av webrammeverket Django  og et podkas
 Disse stegene utføres for å sette opp et lokalt utviklingsmiljø for podkastserveren. I.e det du må gjøre for å få ting opp og kjørende, lokalt.
 
 Før du kjører listen her bør du ha på plass **Python, Pip og Virtualenvwrapper**. 
+
 Hvordan ha de på plass? sjekk her: [Sette opp Python](./docs/Sette-opp-Python.md)
 
 
