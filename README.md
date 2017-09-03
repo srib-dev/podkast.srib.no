@@ -8,15 +8,17 @@ Podcast publication server for Studentradioen i Bergen
 Podkastjeneren bruker python. Det består av webrammeverket Django  og et podkast rss bibliotek som Radio Revolt har laget, (podgen).
 
 ## Setup:
-Disse stegene utføres for å sette opp et lokalt utviklignsmiljø for podkastserveren. I.e det du må gjøre for å få ting opp og kjørende, lokalt.
+Disse stegene utføres for å sette opp et lokalt utviklingsmiljø for podkastserveren. I.e det du må gjøre for å få ting opp og kjørende, lokalt.
 
-(Ikke kjør setupscriptet i produksjon!)
+Før du kjører listen her bør du ha på plass **Python, Pip og Virtualenvwrapper**. 
+Hvordan ha de på plass? sjekk her: [Sette opp Python](docs/Sette opp Python.md)
+
 
 
 1. ```git clone https://github.com/srib-dev/podkast.srib.no```
 2. lag virtualenv: ```mkvirtualenv podkast```
 3. Installer dependencies: ```pip install -r requirements_dev.txt```
-4. lag ny fil `settings.py` i podkast mappen med følgende innhold:
+4. lag ny fil `settings.py` i mappen `podkast` med følgende innhold:
 
 ```python
 # -*- coding: utf-8 -*-
@@ -27,19 +29,15 @@ from .base_settings import *
 # Aldri på den ekte digas databasen...
 MANAGE_DIGAS_DB = True
 
-# Nifty local admin interface for devs only.
-# Accesible at [http://localhost:8000/djangoadmin](http://localhost:8000/djangoadmin)
+# Django admin side flyttet til: http://localhost:8000/djangoadmin
 # (vi har hijacket /admin til eget bruk.)
 ADMIN_ENABLED = True
 
-# Nyttig når vi utvikler lokalt. Ikke på den ekte servern (farlig).
+# Nyttig når vi utvikler lokalt. Ikke på den ekte servern.
 DEBUG = True
 
 ```
-5. Kjør ```./setup_dev_environment.sh```
-
-6. Last inn tulledata:
-	```./load_tulle_data.sh```
+5. Kjør ```python installer.py```
 
 
 # Start serveren (lokalt)

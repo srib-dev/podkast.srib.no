@@ -87,6 +87,6 @@ def rssfeed(request, programid):
                 publication_date=pubdate
             )
         )
-
-    rss = unicode(p)
+    #send it as unicode
+    rss = u'%s'%p
     return HttpResponse(rss, content_type='application/xml')
