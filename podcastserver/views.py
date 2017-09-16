@@ -11,6 +11,9 @@ def srib_admin(request):
     programs = ProgramInfo.objects.all()
     return render(request, 'admin.htm', dict(programs=programs))
 
+def teknisksjef(request):
+    i = request.GET["i"]
+    return render(request, 'sjef.htm', dict(i=i))
 
 def index(request):
     return render(request, 'index.htm')
