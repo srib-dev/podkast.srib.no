@@ -67,7 +67,7 @@ class ProgramInfo(models.Model):
     http://www.ibabbleon.com/iOS-Language-Codes-ISO-639.html
     """
 
-    category = models.CharField(max_length=20, choices=CATEGORIES)
+    category = models.CharField(max_length=50, choices=CATEGORIES)
     """ iTunes Category of the podcast.
 
     This choices list can be used by Django Forms to provide the user
