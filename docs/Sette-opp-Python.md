@@ -7,7 +7,6 @@ ingrediensene på din pc for å bake god pythonkake.  Kort fortalt handler det o
 	3. virtualenvwrapper
 
 #1. Python trengs installeres: 
-
 	1. gå til [Download Python](https://www.python.org/downloads/) og velg siste versjon (3.x).
 	2. Får du spørsmål om å inkludere Pip / Python i PATH under instalasjon: VELG JA!
 
