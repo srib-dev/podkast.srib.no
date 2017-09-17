@@ -6,10 +6,14 @@ from .util import mp3url, digas2pubdate, guid, feed_url
 
 # Create your views here.
 
+
 def srib_admin(request):
     # Henter ut alle podcastprogrammer
-    programs = ProgramInfo.objects.all()
-    return render(request, 'admin.htm', dict(programs=programs))
+    if request.user.is_authenticated:
+        programs = ProgramInfo.objects.all()
+        return render(request, 'admin.htm', dict(programs=programs))
+    else:
+        return HttpResponse("Robin fix this!")
 
 def teknisksjef(request):
     i = request.GET["i"]
