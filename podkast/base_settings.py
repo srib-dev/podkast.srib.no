@@ -264,4 +264,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-ALLOWED_HOSTS = ['staging.podcast.srib.no', 'podcast.srib.no']
+ALLOWED_HOSTS = ['staging.podcast.srib.no', 'podcast.srib.no', 'localhost', '127.0.0.1']
