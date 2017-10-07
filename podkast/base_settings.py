@@ -88,7 +88,7 @@ FEED_PATH = "feed"
         https://podkast.srib.no/feed/8
 """
 
-SOUNDFILE_PATH = "podcast"
+SOUNDFILE_PATH = "/srv/podcast"
 """ Part of the url that are used for the sound files
 
     This is used to build the urls for the actual mp3 files.
