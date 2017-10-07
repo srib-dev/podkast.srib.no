@@ -3,12 +3,16 @@ from .models import Definition, DigasPodcast, ProgramInfo
 from django.http import HttpResponse, JsonResponse
 from podgen import Podcast, Episode, Media, Category, Person
 from .util import mp3url, digas2pubdate, guid, feed_url
+from django.conf import settings
 
 # Create your views here.
 
 
 def srib_admin(request):
     # Henter ut alle podcastprogrammer
+
+    # return HttpResponse(settings.STATIC_ROOT)
+
     if request.user.is_authenticated:
         programs = ProgramInfo.objects.all()
         return render(request, 'admin.htm', dict(programs=programs))
