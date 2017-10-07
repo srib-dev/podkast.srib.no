@@ -18,7 +18,7 @@ from django.conf import settings
 from django.contrib import admin
 
 # Step 1. Import the view functions
-from podcastserver.views import rssfeed, definitions, allpodcasts, index, srib_admin, teknisksjef, login
+from podcastserver.views import rssfeed, definitions, allpodcasts, index, srib_admin, teknisksjef
 
 # Step 2. Route urls to the view function
 urlpatterns = [
