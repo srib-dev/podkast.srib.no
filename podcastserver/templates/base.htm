@@ -113,7 +113,7 @@
         }
 
         #bannerholder {
-            background-image: url("{% static "gfx/banner.jpg" %}");
+            background-image: url("{% static 'gfx/banner.jpg' %}");
             background-position: 50% 50%;
             height: 40%;
             min-height: 200px;
@@ -141,6 +141,47 @@
             }
         }
 
+    /* @TODO: put this in -> admin.css  - JSolsvik 07.10.17 */
+    .grid-wrapper {   
+        display: grid; 
+        grid-template-columns: repeat(8, 1fr);   
+        grid-gap: 10px;
+        grid-template-rows: 200px auto;
+    }
+
+    .grid-banner { 
+        grid-column: 1/7;
+    }
+
+    .grid-banner img {
+        height: 100%;
+    }
+
+    i { cursor: pointer; 
+        color: #505050;
+    }
+
+    .grid-btn-search {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        grid-column: 7/8;
+    }
+    .grid-btn-burger { 
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        grid-column: 8/9;
+    }
+
+    .grid-btn-card { 
+        background-color: rgb(111, 138, 54);
+        grid-column: span 4;
+        grid-row: span 2; 
+    }
+    /* ------- */
 
     </style>
 
@@ -149,7 +190,11 @@
 </head>
 <body>
     <div id="bannerholder"></div>
-    {% block navigation %}{% endblock navigation %}
+    {% block navigation %}
+    
+        |
+    
+    {% endblock navigation %}
     <div id="content">
         
         {% block content %}hehehehe.{% endblock content %}
