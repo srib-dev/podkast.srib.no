@@ -3,15 +3,25 @@
 
 {% block content %}
 
-<h1>Adminside</h1>
 
-<h2> Programmer </h2>
+<main class="grid-wrapper">
 
-{% for program in programs %}
-    <div style="background-color: #ccc; border: 1px solid black; display: inline-block; padding: 2em;">
-    <h3> {{ program.name }} </h3>
-    <img src="{{ program.image_url }}" alt="{{program.name}}" title="{{program.name}}">
-    <p> {{ program.description }} </p>
-{% endfor %}
+    <div class="grid-banner"><img src="{% static "img/logo.svg" %}"></img></div>
+    <div class="grid-btn-search"><i class="fa fa-search fa-5x"></i></div>
+    <div class="grid-btn-burger"><i class="fa fa-bars fa-5x"></i></div>
+
+    {% for program in programs %}
+
+        <div class="grid-btn-card">btn-card</div>
+        <!--div style="background-color: #ccc; border: 1px solid black; display: inline-block; padding: 2em;">
+        <h3> {{ program.name }} </h3>
+        <img src="{{ program.image_url }}" alt="{{program.name}}" title="{{program.name}}">
+        <p> {{ program.description }} </p-->
+    {% endfor %}
+
+</main>
+
+
+
 
 {% endblock %}
