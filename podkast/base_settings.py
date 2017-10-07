@@ -223,7 +223,7 @@ if 'test' in sys.argv:
         It's only safe to set this to true if you use a fake digas database (
         i.e a localhost mysql server for development or a sqlite file).
 """
-MANAGE_DIGAS_SCHEMA = False
+MANAGE_DIGAS_DB = False
 
 
 # Password validation

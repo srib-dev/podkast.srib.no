@@ -126,7 +126,10 @@
          id="image6642"
          x="183.24657"
          y="625.0376"
-         clip-path="url(#clipPath1601)" />
+         clip-path="url(#clipPath1601)"
+         style="fill:#505050;fill-opacity:1"
+         inkscape:export-xdpi="96"
+         inkscape:export-ydpi="96" />
     </g>
   </g>
   <g
