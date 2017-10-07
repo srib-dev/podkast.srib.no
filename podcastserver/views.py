@@ -19,18 +19,18 @@ def srib_admin(request):
     else:
         return HttpResponse("Robin fix this!")
 
+
 def teknisksjef(request):
     i = request.GET["i"]
     return render(request, 'sjef.htm', dict(i=i))
+
 
 def index(request):
     return render(request, 'index.htm')
 
 
-
 def definitions(request):
     """ Lists all the programs from the definitino database.
- 
     Should be some.
     """
     definitions = Definition.objects.using('digas').all()
@@ -43,8 +43,19 @@ def allpodcasts(request):
     program = "Skumma Kultur"
     definition = Definition.objects.using('digas').get(name=program)
     programnr = definition.defnr
-    podcasts = DigasPodcast.objects.using('digas').filter(softdel=0, program=programnr).only('program', 'title', 'remark', 'author', 'createdate', 'broadcastdate', 'filename', 'filesize', 'duration', 'softdel')[:50]
-    
+    podcasts = DigasPodcast.objects.using('digas').filter(
+        softdel=0, program=programnr).only(
+            'program', 
+            'title', 
+            'remark', 
+            'author', 
+            'createdate', 
+            'broadcastdate', 
+            'filename', 
+            'filesize', 
+            'duration', 
+            'softdel')[:50]
+
     return render(request, 'podcasts.htm', dict(podcasts=podcasts, nr=len(podcasts)))
 
 
