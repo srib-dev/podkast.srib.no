@@ -6,27 +6,29 @@
 
     Collection of usefull utitilities for the podcast server.
 """
-import os.path
+
 from django.conf import settings
 import pytz
 from datetime import datetime
 from django.urls import reverse
 
+
 def feed_url(programid, old=False):
-    """ returns full url to a feed given its programid (int).
+    """
+        returns full url to a feed given its programid (int).
 
         If old is set to True, it will return the old url format.
-
-        see doc: https://docs.djangoproject.com/en/1.11/ref/urlresolvers/#reverse
+        see doc:
+        https://docs.djangoproject.com/en/1.11/ref/urlresolvers/#reverse
     """
-    if old == True:
-        # For backwards compatibility.
+
+    if old is True:
         return settings.OLD_FEED_URL_FORMAT % programid
     else:
-        # Returns the new format. Using the current urlformat 
+        # Returns the new format. Using the current urlformat
         # from settings.
-        path = reverse('rssfeed', 
-                        args=(programid,))
+        path = reverse('rssfeed',
+                       args=(programid,))
         return settings.BASE_URL + path
 
 
@@ -74,7 +76,7 @@ def guid(filepath):
         https://podgen.readthedocs.io/en/latest/api.episode.html#podgen.Episode.id
 
     Therefore we MUST set the global id of the episode to the same format
-    as was used between 2009-2017 on the old podcast server. At least for 
+    as was used between 2009-2017 on the old podcast server. At least for
     those episodes. At the time of writing, I'm running out of dev-time
     so I choose the guid to always be the same format, even for new episodes.
 
@@ -93,13 +95,13 @@ def guid(filepath):
 def digas2pubdate(createdate, broadcastdate=0):
     """ Convert dates found in the digas db and selects a pubDate.
 
-        Check if there is a Broadcastdate set, 
+        Check if there is a Broadcastdate set,
         otherwise pick createdate as the publication date.
 
         Also, make the date timezone aware. Which is a bit silly.
-        Since it is only a date. 
+        Since it is only a date.
     """
-    digasformat = "%Y%m%d" #yyyymmdd
+    digasformat = "%Y%m%d"  # yyyymmdd
     createdate = datetime.strptime(str(createdate), digasformat)
     try:
         # Some broadcastdates are blank in digas, they are stored as "0"
@@ -107,7 +109,7 @@ def digas2pubdate(createdate, broadcastdate=0):
         broadcastdate = datetime.strptime(str(broadcastdate), digasformat)
         pubdate = broadcastdate
     except:
-        pubdate=createdate
+        pubdate = createdate
 
     # Make it timezone aware
     tz = pytz.timezone(settings.TIME_ZONE)
