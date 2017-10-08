@@ -93,6 +93,7 @@ def rssfeed(request, programid):
         owner=globalsettings.owner,
         feed_url=feed_url(programid),
         new_feed_url=feed_url(programid),
+        image = programinfo.image_url,
     )
 
     for episode in podcasts:
