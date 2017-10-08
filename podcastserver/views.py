@@ -17,7 +17,7 @@ def srib_admin(request):
         programs = ProgramInfo.objects.all()
         return render(request, 'admin.htm', dict(programs=programs))
     else:
-        return HttpResponse("Robin fix this!")
+        return render(request, 'registration/login.html')
 
 
 def teknisksjef(request):
