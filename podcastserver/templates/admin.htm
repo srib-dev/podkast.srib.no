@@ -6,17 +6,22 @@
 
 <main class="grid-wrapper">
 
+    <!-- TODO: move this up to a <header> in <head> in base.htm -->
     <div class="grid-banner"><img src="{% static "img/logo.svg" %}"></img></div>
     <div class="grid-btn-search"><i class="fa fa-search fa-5x"></i></div>
     <div class="grid-btn-burger"><i class="fa fa-bars fa-5x"></i></div>
-
+    <!-- end TODO -->
     {% for program in programs %}
 
         <div class="grid-btn-card">
-        <h3> {{ program.name }} </h3>
-        <img class="program-image" src="{{ program.image_url }}" alt="{{program.name}}" title="{{program.name}}">
-        btn-card</div>
-        <!--div style="background-color: #ccc; border: 1px solid black; display: inline-block; padding: 2em;">
+            <h3> {{ program.name }} </h3>
+            <img class="program-image" src="{{ program.image_url }}" alt="{{program.name}}" title="{{program.name}}">
+            <a href="{% url 'rssfeed' program.programid %}">
+                <i class="fa fa-rss" aria-hidden="true"></i>
+                RSS
+            </a>
+        </div>
+        <!--
         <h3> {{ program.name }} </h3>
         <img src="{{ program.image_url }}" alt="{{program.name}}" title="{{program.name}}">
         <p> {{ program.description }} </p-->
