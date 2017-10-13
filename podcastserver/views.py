@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from .models import Definition, DigasPodcast, ProgramInfo
 from django.http import HttpResponse, JsonResponse
-from podgen import Podcast, Episode, Media, Category, Person
+from podgen import Episode, Media, Category, Person
+from .sribpodcast import SribPodcast
 from .util import mp3url, digas2pubdate, guid, feed_url
 from django.conf import settings
 
@@ -81,7 +82,7 @@ def rssfeed(request, programid):
     # or set up in a new environment.
     from .models import globalsettings
 
-    p = Podcast(
+    p = SribPodcast(
         name=programinfo.name,
         subtitle=programinfo.subtitle,
         description=programinfo.description,
@@ -93,7 +94,8 @@ def rssfeed(request, programid):
         owner=globalsettings.owner,
         feed_url=feed_url(programid),
         new_feed_url=feed_url(programid),
-        image = programinfo.image_url,
+        link=feed_url(programid),
+        image=programinfo.image_url,
     )
 
     for episode in podcasts:
@@ -111,6 +113,6 @@ def rssfeed(request, programid):
                 publication_date=pubdate
             )
         )
-    #send it as unicode
-    rss = u'%s'%p
+    # send it as unicode
+    rss = u'%s' % p
     return HttpResponse(rss, content_type='application/xml')
