@@ -105,6 +105,7 @@ def rssfeed(request, programid):
             Episode(
                 title=episode.title,
                 media=Media(mp3url(episode.filename), episode.filesize),
+                link=mp3url(episode),
                 id=guid(episode.filename),
                 summary=episode.remark,
                 publication_date=pubdate
