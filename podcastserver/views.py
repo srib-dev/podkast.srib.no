@@ -5,13 +5,9 @@ from podgen import Podcast, Episode, Media, Category, Person
 from .util import mp3url, digas2pubdate, guid, feed_url
 from django.conf import settings
 
-# Create your views here.
-
 
 def srib_admin(request):
     # Henter ut alle podcastprogrammer
-
-    # return HttpResponse(settings.STATIC_ROOT)
 
     if request.user.is_authenticated:
         programs = ProgramInfo.objects.all()
@@ -45,19 +41,19 @@ def allpodcasts(request):
     programnr = definition.defnr
     podcasts = DigasPodcast.objects.using('digas').filter(
         softdel=0, program=programnr).only(
-            'program', 
-            'title', 
-            'remark', 
-            'author', 
-            'createdate', 
-            'broadcastdate', 
-            'filename', 
-            'filesize', 
-            'duration', 
+            'program',
+            'title',
+            'remark',
+            'author',
+            'createdate',
+            'broadcastdate',
+            'filename',
+            'filesize',
+            'duration',
             'softdel')[:50]
 
-    return render(request, 'podcasts.htm', dict(podcasts=podcasts, nr=len(podcasts)))
-
+    return render(request, 'podcasts.htm',
+                  dict(podcasts=podcasts, nr=len(podcasts)))
 
 
 def rssfeed(request, programid):
@@ -85,7 +81,7 @@ def rssfeed(request, programid):
         name=programinfo.name,
         subtitle=programinfo.subtitle,
         description=programinfo.description,
-        website=programinfo.website,
+        website=feed_url(programid),  # programinfo.website,
         explicit=programinfo.explicit,
         category=Category(programinfo.category),
         authors=[globalsettings.owner],
@@ -93,7 +89,7 @@ def rssfeed(request, programid):
         owner=globalsettings.owner,
         feed_url=feed_url(programid),
         new_feed_url=feed_url(programid),
-        image = programinfo.image_url,
+        image=programinfo.image_url,
     )
 
     for episode in podcasts:
@@ -105,12 +101,13 @@ def rssfeed(request, programid):
             Episode(
                 title=episode.title,
                 media=Media(mp3url(episode.filename), episode.filesize),
-                link=mp3url(episode.filename),
+                link=mp3url(episode.filename),  # multifeedreader uses this.
                 id=guid(episode.filename),
                 summary=episode.remark,
                 publication_date=pubdate
             )
         )
-    #send it as unicode
-    rss = u'%s'%p
+
+    # send it as unicode
+    rss = u'%s' % p
     return HttpResponse(rss, content_type='application/xml')
