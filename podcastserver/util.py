@@ -117,14 +117,12 @@ def digas2pubdate(createdate, broadcastdate=0):
     return pubdate
 
 
-
-
 def convert_programinfo(oldfile, newfile):
     """ Converts programinfo from the old server format to the new server format.
 
     Basically, in the old java server, I did a json dump from phpmyadmin.
-    Then this script maps the fields from there to the fields in the ProgramInfo
-    model here.
+    Then this script maps the fields from there to the fields in the
+    ProgramInfo model here.
 
     Some fields are not present in the old db-table:
         - explicit
@@ -143,38 +141,40 @@ def convert_programinfo(oldfile, newfile):
 
     program_template = """
     {
-        "model": "podcastserver.programinfo", 
-        "pk": %(pk)d, 
+        "model": "podcastserver.programinfo",
+        "pk": %(pk)d,
         "fields": {
-                "programid": %(programid)d, 
-                "name": "%(name)s", 
+                "programid": %(programid)d,
+                "name": "%(name)s",
                 "subtitle": %(subtitle)s,
-                "description": %(description)s, 
-                "website": "http://srib.no", 
-                "explicit": false, 
-                "publish": false, 
-                "language": "nb", 
-                "category": "%(category)s", 
-                "image_url": "%(image_url)s", 
-                "owner": 1, 
+                "description": %(description)s,
+                "website": "http://srib.no",
+                "explicit": false,
+                "publish": false,
+                "language": "nb",
+                "category": "%(category)s",
+                "image_url": "%(image_url)s",
+                "owner": 1,
                 "authors": [1]
         }
 
     }"""
 
-    clean=lambda s: '"%s"'%repr(s)[1:-1]
-    # long hack to just print escaped newlines
-    # and contain it with doubleqoutes.. Json doesn't support single quotes.
+    def clean(s):
+        """ long hack to just print escaped newlines
+        and contain it with doubleqoutes..
+        Json doesn't support single quotes. """
+        return '"%s"' % repr(s)[1:-1]
 
     for pk, program in enumerate(old_table, 1):
-        #new field  --- mapped-- to old field
+        # new field  --- mapped-- to old field
         program['name'] = program['title']
         program['subtitle'] = clean(program['subtitle'])
         program['description'] = clean(program['description'])
         program['image_url'] = program['imglink']
         program['programid'] = int(program['program'])
         program['pk'] = pk
-        
+
         progstring = program_template % program
         new_table += progstring + ","
 
@@ -183,7 +183,6 @@ def convert_programinfo(oldfile, newfile):
     # Save it.
     with open(newfile, 'w+') as f:
         f.write(new_table)
-
 
 
 if __name__ == '__main__':
