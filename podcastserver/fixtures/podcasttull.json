@@ -26,6 +26,83 @@
         1
       ]
     }
+  },{
+    "model": "podcastserver.programinfo",
+    "pk": 2,
+    "fields": {
+      "programid": 2,
+      "name": "Basta Boom",
+      "subtitle": "tl!",
+      "description": "Humbug.",
+      "website": "http://srib.no/soepel-i-lokalet",
+      "explicit": true,
+      "publish": true,
+      "language": "nb",
+      "category": "News & Politics",
+      "image_url": "http://www.wikihow.com/images/9/94/Use-Banana-Peels-Intro.jpg",
+      "owner": 1,
+      "authors": [
+        1
+      ]
+    }
+  },{
+    "model": "podcastserver.programinfo",
+    "pk": 3,
+    "fields": {
+      "programid": 3,
+      "name": "Øl i taket",
+      "subtitle": "tre stykk bananskall!",
+      "description": "Og sprit i havet...",
+      "website": "http://srib.no/soepel-i-lokalet",
+      "explicit": true,
+      "publish": true,
+      "language": "nb",
+      "category": "News & Politics",
+      "image_url": "http://www.wikihow.com/images/9/94/Use-Banana-Peels-Intro.jpg",
+      "owner": 1,
+      "authors": [
+        1
+      ]
+    }
+  },{
+    "model": "podcastserver.programinfo",
+    "pk": 4,
+    "fields": {
+      "programid": 4,
+      "name": "fiskekaker i sofan",
+      "subtitle": "Fiskekakene lengter etter et hjem!",
+      "description": "Mister håret i alt dette..",
+      "website": "http://srib.no/soepel-i-lokalet",
+      "explicit": true,
+      "publish": true,
+      "language": "nb",
+      "category": "News & Politics",
+      "image_url": "http://www.wikihow.com/images/9/94/Use-Banana-Peels-Intro.jpg",
+      "owner": 1,
+      "authors": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "podcastserver.programinfo",
+    "pk": 5,
+    "fields": {
+      "programid": 5,
+      "name": "Litt sjef og helt teknisk",
+      "subtitle": "Teknisk drift av Radioen, på radio!",
+      "description": "Teknisk Sjef er artig, forarget, litt trist men minst skuffet. Alltid humør hos Litt sjef og helt teknisk!",
+      "website": "http://srib.no/teknisk-sjef",
+      "explicit": true,
+      "publish": true,
+      "language": "nb",
+      "category": "News & Politics",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Mallard2.jpg/1200px-Mallard2.jpg",
+      "owner": 1,
+      "authors": [
+        1
+      ]
+    }
   }
  
 ]

@@ -22,7 +22,9 @@ def teknisksjef(request):
 
 
 def index(request):
-    return render(request, 'index.htm')
+    # Henter ut kun programmer som har publish satt til True.
+    publiserte_programmer = ProgramInfo.objects.filter(publish=True)
+    return render(request, 'index.htm', dict(programs=publiserte_programmer))
 
 
 def definitions(request):
@@ -31,29 +33,6 @@ def definitions(request):
     """
     definitions = Definition.objects.using('digas').all()
     return render(request, 'definitions.htm', dict(definitions=definitions))
-
-
-def allpodcasts(request):
-    """ Testing how long it takes to fetch ALL podcasts with ALL fields from digas.
-    """
-    program = "Skumma Kultur"
-    definition = Definition.objects.using('digas').get(name=program)
-    programnr = definition.defnr
-    podcasts = DigasPodcast.objects.using('digas').filter(
-        softdel=0, program=programnr).only(
-            'program',
-            'title',
-            'remark',
-            'author',
-            'createdate',
-            'broadcastdate',
-            'filename',
-            'filesize',
-            'duration',
-            'softdel')[:50]
-
-    return render(request, 'podcasts.htm',
-                  dict(podcasts=podcasts, nr=len(podcasts)))
 
 
 def rssfeed(request, programid):
