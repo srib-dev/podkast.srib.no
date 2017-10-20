@@ -1,0 +1,20 @@
+<div class="grid-btn-card">
+    <h2 class="my-3"> {{ program.name }} </h2>
+    <img class="program-image" src="{{ program.image_url }}" alt="{{program.name}}" title="{{program.name}}">
+    
+    <a href="{% url 'rssfeed' program.programid %}" class="btn btn-secondary my-2">
+        <i class="fa fa-rss " aria-hidden="true"></i> RSS
+    </a>
+
+    <button class="btn btn-secondary" data-toggle="collapse" 
+            data-target="#beskrivelse-{{ program.programid }}">
+        Beskrivelse
+    </button>
+
+    <div class="collapse program-description mx-3" id="beskrivelse-{{ program.programid }}" >
+        <b> {{ program.subtitle }} </b>
+        <p> {{ program.description }} </p>    
+    </div>
+</div>
+        
+        
