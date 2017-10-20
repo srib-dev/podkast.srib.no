@@ -1,8 +1,12 @@
 {% extends 'base.htm' %}
 {% load static %}
+<!-- template: index.htm -->
 
 {% block content %}
 
-<h1>Hei, nå var du flink =)</h1>
-<h2><a href="/djangoadmin">Link til admin.</a></h2>
+    {% for program in programs %}
+        <!-- Snippets ligger i template mappen --> 
+        {% include "snippets/podcast-card.htm" with program=program %}
+    {% endfor %}
+
 {% endblock %}

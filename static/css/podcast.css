@@ -8,3 +8,168 @@
 img.program-image {
     width: 100%
 }
+
+
+body { 
+            margin: 0 auto;
+            text-align: center;
+            font-family: Montserrat, Helvetica, Arial, sans-serif;
+            
+        }
+
+        pre {
+            font-family: Montserrat, Helvetica, Arial, sans-serif;
+            text-align: left;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin: 0 auto;
+            margin-bottom: 2em;
+            margin-top: 4em;    
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 1em;
+            line-height:1.4em;
+        }
+
+        @font-face {
+            font-family: 'Montserrat';
+            src: url("{% static 'fonts/montserrat-regular-webfont.woff2' %}") format('woff2'),
+                 url("{% static 'fonts/montserrat-regular-webfont.woff' %}") format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+     
+
+
+        #content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        #description-wrapper {
+            text-align: center;
+            margin: 0 auto;
+        }
+        .paragraph {
+            margin: 0 auto;
+            text-align: left;
+            padding: 1em;
+            line-height: 1.3em;
+            max-width: 400px;
+        }
+
+        .item-wrapper {
+            margin: 1.5em;
+        }
+
+
+        #item-picture{
+            width: 200px;
+        }
+
+       
+        a { border: none; text-decoration: none; color: black;} 
+
+       
+        input[type=text] {
+            height: 2em;
+        }
+
+        
+
+
+        #footer {
+        clear: both;
+        display: block;
+        margin: 0 auto;
+        padding: 0;
+        position: relative;
+        background-color: #2f2f2f;
+        color: #a0a0a0;
+        z-index: 10;
+        min-height: 400px;
+        margin-top: 5em;
+        padding:1em;
+        }
+
+        .footer-cell {
+            max-width: 500px;
+            margin: 4em auto;
+            display: inline-block;
+            vertical-align: top;
+
+        }
+
+        .footer-cell p, .footer-cell h3 {
+            text-align: left;
+        }
+
+
+    /* @TODO: put this in -> admin.css  - JSolsvik 07.10.17 */
+    /* @DONE: its in podcast.css instead. since we reuse it.  - Robin 20.10.17 */
+    .grid-wrapper {   
+        display: grid; 
+        grid-template-columns: repeat(8, 1fr);   
+        grid-gap: 10px;
+        grid-template-rows: 200px auto;
+    }
+
+    .grid-banner { 
+        grid-column: 1/7;
+    }
+
+    .grid-banner img {
+        height: 100%;
+        display: inline-block;
+    }
+
+    .grid-banner h1 {
+        display: inline-block;
+    }
+
+    i { cursor: pointer; 
+        color: #505050;
+    }
+
+    .grid-btn-search {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        grid-column: 7/8;
+    }
+    .grid-btn-burger { 
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        grid-column: 8/9;
+    }
+
+    .grid-btn-card { 
+        border: 1px solid #e2e2e2;
+        //background-color: #8e8e8e;
+        grid-column: span 4;
+        grid-row: span 2; 
+    }
+    /* ------- */
+
+    .program-description {
+        text-align: left;
+    }
+
+
+ /* ------ Theme ------------- */
+
+ .btn-secondary {
+    background-color: white;
+    color: #505050;
+ }
+
+
