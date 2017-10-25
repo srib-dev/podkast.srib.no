@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Definition, DigasPodcast, ProgramInfo
 from django.http import HttpResponse, JsonResponse
 from podgen import Podcast, Episode, Media, Category, Person
@@ -33,6 +33,12 @@ def definitions(request):
     """
     definitions = Definition.objects.using('digas').all()
     return render(request, 'definitions.htm', dict(definitions=definitions))
+
+
+def thumbnail(request, programid):
+    """ returns a redirect to the url for the podcast image """
+    program = ProgramInfo.objects.get(programid=int(programid))
+    return redirect(program.image_url)
 
 
 def rssfeed(request, programid):
