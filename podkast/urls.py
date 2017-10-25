@@ -18,12 +18,13 @@ from django.conf import settings
 from django.contrib import admin
 
 # Step 1. Import the view functions
-from podcastserver.views import rssfeed, definitions, index, srib_admin, teknisksjef
+from podcastserver.views import rssfeed, definitions, index, srib_admin, teknisksjef, thumbnail
 
 # Step 2. Route urls to the view function
 urlpatterns = [
     url(r'^defs', definitions),
     url(r'^feed/(\d+)', rssfeed, name='rssfeed'),
+    url(r'^thumbnail/(\d+)', thumbnail, name='thumbnail'),
     url(r'^$', index, name='index'),
     url(r'^admin', srib_admin, name='srib_admin'),
     url(r'^sjef', teknisksjef, name='teknisksjef'),
