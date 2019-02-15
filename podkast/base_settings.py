@@ -34,7 +34,7 @@ SECRET_KEY = 'h)a11b^x61y)(sqzsootokuqf@ip25vw-v+*9=pypm9r+$9ee='
 #
 ###################################################
 
-BASE_URL = "https://dts.podtrac.com/redirect.mp3/127.0.0.1:8000"
+BASE_URL = "http://127.0.0.1:8000"
 """ Base of the url(s) to rss feeds.
 
     The domain and possible port to the podcast server.
@@ -268,4 +268,4 @@ STATICFILES_DIRS = [
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
-ALLOWED_HOSTS = ['staging.podcast.srib.no', 'podcast.srib.no', 'localhost', '127.0.0.1', 'dts.podtrac.com']
+ALLOWED_HOSTS = ['staging.podcast.srib.no', 'podcast.srib.no', 'localhost', '127.0.0.1']
