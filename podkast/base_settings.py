@@ -34,13 +34,13 @@ SECRET_KEY = 'h)a11b^x61y)(sqzsootokuqf@ip25vw-v+*9=pypm9r+$9ee='
 #
 ###################################################
 
-BASE_URL = "https://dts.podtrac.com/redirect.mp3/127.0.0.1:8000"
+BASE_URL = "http://redirect.mp3/127.0.0.1:8000"
 """ Base of the url(s) to rss feeds.
 
     The domain and possible port to the podcast server.
 """
 
-OLD_BASE_URL = "https://dts.podtrac.com/redirect.mp3/podcast.srib.no:8080"
+OLD_BASE_URL = "http:/podcast.srib.no:8080"
 """ The base url on the old java server we used between 2009-2017
 
     This is used to tell itunes we moved. We need to have redirects

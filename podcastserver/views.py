@@ -86,7 +86,7 @@ def rssfeed(request, programid):
             Episode(
                 title=episode.title,
                 media=Media(mp3url(episode.filename), episode.filesize),
-                link=mp3url(episode.filename),  # multifeedreader uses this.
+                link="https://dts.podtrac.com/" + mp3url(episode.filename)[7:],  # multifeedreader uses this.
                 id=guid(episode.filename),
                 summary=episode.remark,
                 publication_date=pubdate
