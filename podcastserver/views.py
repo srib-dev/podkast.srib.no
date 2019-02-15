@@ -23,7 +23,7 @@ def teknisksjef(request):
 
 def index(request):
     # Henter ut kun programmer som har publish satt til True.
-    publiserte_programmer = ProgramInfo.objects.filter(publish=True)
+    publiserte_programmer = ProgramInfo.objects.filter(publish=False)
     return render(request, 'index.htm', dict(programs=publiserte_programmer))
 
 
