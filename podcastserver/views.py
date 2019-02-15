@@ -85,7 +85,7 @@ def rssfeed(request, programid):
         p.episodes.append(
             Episode(
                 title=episode.title,
-                media=Media(mp3url(episode.filename), episode.filesize),
+                media=Media("http://dts.podtrac.com/redirect.mp3/"+mp3url(episode.filename)[7:], episode.filesize),
                 link=mp3url(episode.filename),  # multifeedreader uses this.
                 id=guid(episode.filename),
                 summary=episode.remark,
