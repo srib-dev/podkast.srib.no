@@ -62,8 +62,13 @@ def rssfeed(request, programid):
     # or set up in a new environment.
     from .models import globalsettings
 
+    if programinfo.name == "Assemble":
+        pm = "DETTE ER PROGRAMNAMN"
+    else:
+        pm = programinfo.name
+
     p = Podcast(
-        name=programinfo.name,
+        name=pm,
         subtitle=programinfo.subtitle,
         description=programinfo.description,
         website=feed_url(programid),  # programinfo.website,
