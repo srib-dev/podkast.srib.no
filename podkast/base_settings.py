@@ -34,7 +34,7 @@ SECRET_KEY = 'h)a11b^x61y)(sqzsootokuqf@ip25vw-v+*9=pypm9r+$9ee='
 #
 ###################################################
 
-BASE_URL = "http://127.0.0.1:8000"
+BASE_URL = "https://dts.podtrac.com/127.0.0.1:8000"
 """ Base of the url(s) to rss feeds.
 
     The domain and possible port to the podcast server.
