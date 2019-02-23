@@ -4,7 +4,7 @@ from django.http import HttpResponse, JsonResponse
 from podgen import Podcast, Episode, Media, Category, Person
 from .util import mp3url, digas2pubdate, guid, feed_url
 from django.conf import settings
-
+from django.utils import timezone
 
 def srib_admin(request):
     # Henter ut alle podcastprogrammer
@@ -81,11 +81,17 @@ def rssfeed(request, programid):
         # Get pubdate from createdate or broadcastdate
         pubdate = digas2pubdate(episode.createdate,
                                 episode.broadcastdate)
+
+        now = timezone.now()
+
+        if pubdate > now:
+            continue
+
         # Add the episode to the list
         p.episodes.append(
             Episode(
-                title=episode.title,
-                media=Media("hei der" + mp3url(episode.filename), episode.filesize),
+                title= str(type(pubdate)) + " | " + str(type(now)),#episode.title,
+                media=Media(mp3url(episode.filename), episode.filesize),
                 link=mp3url(episode.filename),  # multifeedreader uses this.
                 id=guid(episode.filename),
                 summary=episode.remark,
