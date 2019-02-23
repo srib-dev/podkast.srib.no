@@ -64,7 +64,7 @@ def rssfeed(request, programid):
     from .models import globalsettings
 
     p = Podcast(
-        name=pm,
+        name=programinfo.name,
         subtitle=programinfo.subtitle,
         description=programinfo.description,
         website=feed_url(programid),  # programinfo.website,
