@@ -4,6 +4,7 @@ from django.http import HttpResponse, JsonResponse
 from podgen import Podcast, Episode, Media, Category, Person
 from .util import mp3url, digas2pubdate, guid, feed_url
 from django.conf import settings
+from django.util import timezone
 
 
 def srib_admin(request):
@@ -62,8 +63,14 @@ def rssfeed(request, programid):
     # or set up in a new environment.
     from .models import globalsettings
 
+    if programinfo.name == "Assemble":
+        pm = "DETTE ER PROGRAMNAMN"
+    else:
+        pm = programinfo.name
+
+
     p = Podcast(
-        name=programinfo.name,
+        name=pm,
         subtitle=programinfo.subtitle,
         description=programinfo.description,
         website=feed_url(programid),  # programinfo.website,
@@ -81,11 +88,15 @@ def rssfeed(request, programid):
         # Get pubdate from createdate or broadcastdate
         pubdate = digas2pubdate(episode.createdate,
                                 episode.broadcastdate)
+
+        if pubdate > timezone.now():
+            continue
+
         # Add the episode to the list
         p.episodes.append(
             Episode(
                 title=episode.title,
-                media=Media("http://dts.podtrac.com/redirect.mp3/"+mp3url(episode.filename)[7:], episode.filesize),
+                media=Media(mp3url(episode.filename), episode.filesize),
                 link=mp3url(episode.filename),  # multifeedreader uses this.
                 id=guid(episode.filename),
                 summary=episode.remark,
