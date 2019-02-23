@@ -4,7 +4,7 @@ from django.http import HttpResponse, JsonResponse
 from podgen import Podcast, Episode, Media, Category, Person
 from .util import mp3url, digas2pubdate, guid, feed_url
 from django.conf import settings
-from django.util import timezone
+from django.utils import timezone
 
 
 def srib_admin(request):
