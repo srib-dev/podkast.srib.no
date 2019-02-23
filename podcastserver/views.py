@@ -4,6 +4,7 @@ from django.http import HttpResponse, JsonResponse
 from podgen import Podcast, Episode, Media, Category, Person
 from .util import mp3url, digas2pubdate, guid, feed_url
 from django.conf import settings
+from django.util import timezone
 
 
 def srib_admin(request):
@@ -87,6 +88,10 @@ def rssfeed(request, programid):
         # Get pubdate from createdate or broadcastdate
         pubdate = digas2pubdate(episode.createdate,
                                 episode.broadcastdate)
+
+        if pubdate > timezone.now():
+            continue
+
         # Add the episode to the list
         p.episodes.append(
             Episode(
