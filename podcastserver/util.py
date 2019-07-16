@@ -60,6 +60,8 @@ def mp3url(filepath):
             - map different filepaths to the url. And the reverse:
             - map a episode url to a given filepath.
     """
+    filepath = filepath.replace("\\158.37.6.118\\nas\\digasLydfiler\\podcast\\", "") # NAS moves, changing the prefix to retain just the mp3-file name
+
     filepath = filepath.replace("w:\\", "")
     filepath = filepath.replace("W:\\", "")
     return "%s/%s/%s" % (settings.BASE_URL, settings.SOUNDFILE_PATH, filepath)
