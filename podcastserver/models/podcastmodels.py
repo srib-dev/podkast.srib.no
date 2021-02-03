@@ -92,7 +92,7 @@ class ProgramInfo(models.Model):
         http://podgen.readthedocs.io/en/latest/user/basic_usage_guide/part_1.html#image
     """
 
-    owner = models.ForeignKey(Person)
+    owner = models.ForeignKey(Person, on_delete=models.CASCADE)
     """<itunes:owner>  - the legal owner of the podcast.
 
     should be: Studentradioen i Bergen - kontakt@srib.no
