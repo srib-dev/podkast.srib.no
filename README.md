@@ -116,3 +116,28 @@ DATABASES = {
 """
 MANAGE_DIGAS_DB = False
 ```
+
+Denne dockerfilen kan så kjøres opp med en docker-compose:
+
+```yaml
+version: '3'
+services:
+ srib-podcast:
+  container_name: srib-podcast
+  image: git.fribyte.no:5050/fribyte/ctf:podcast-srib-nginx
+  restart: always
+  volumes:
+   - type: bind
+     source: /home/fribyte/srib-nas-mount/NAS/digasLydfiler/podcast
+     target: /media/podcast
+     read_only: true
+  networks:
+   - azuracast_frontend
+  environment:
+   - VIRTUAL_HOST=podcast.srib.no
+   - LETSENCRYPT_HOST=podcast.srib.no
+
+networks:
+ azuracast_frontend:
+  external: true
+```
