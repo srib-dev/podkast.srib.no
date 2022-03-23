@@ -49,55 +49,58 @@ def rssfeed(request, programid):
     2. gets the programinfo from the app db
     3. Uses podgen to do the actual XML-generation.
     """
-    podcasts = DigasPodcast.objects.using('digas').filter(
-        softdel=0,
-        program=int(programid)).only(
-            'program', 'title', 'remark', 'author',
-            'createdate', 'broadcastdate', 'filename', 'filesize',
-            'duration', 'softdel').order_by('-createdate')
-    programinfo = ProgramInfo.objects.get(programid=int(programid))
+    try:
+        podcasts = DigasPodcast.objects.using('digas').filter(
+            softdel=0,
+            program=int(programid)).only(
+                'program', 'title', 'remark', 'author',
+                'createdate', 'broadcastdate', 'filename', 'filesize',
+                'duration', 'softdel').order_by('-createdate')
+        programinfo = ProgramInfo.objects.get(programid=int(programid))
 
-    # loading globalsettings here, and not at the module_level
-    # This way django won't explode because of missing
-    # constance_config table when we start on scratch
-    # or set up in a new environment.
-    from .models import globalsettings
+        # loading globalsettings here, and not at the module_level
+        # This way django won't explode because of missing
+        # constance_config table when we start on scratch
+        # or set up in a new environment.
+        from .models import globalsettings
 
-    p = Podcast(
-        name=programinfo.name,
-        subtitle=programinfo.subtitle,
-        description=programinfo.description,
-        website=feed_url(programid),  # programinfo.website,
-        explicit=programinfo.explicit,
-        category=Category(programinfo.category),
-        authors=[globalsettings.owner],
-        language=programinfo.language,
-        owner=globalsettings.owner,
-        feed_url=feed_url(programid),
-        new_feed_url=feed_url(programid),
-        image=programinfo.image_url,
-    )
-
-    for episode in podcasts:
-        # Get pubdate from createdate or broadcastdate
-        pubdate = digas2pubdate(episode.createdate,
-                                episode.broadcastdate)
-
-        if pubdate > timezone.now():
-            continue
-
-        # Add the episode to the list
-        p.episodes.append(
-            Episode(
-                title=episode.title,
-                media=Media(mp3url(episode.filename), episode.filesize),
-                link=mp3url(episode.filename),  # multifeedreader uses this.
-                id=guid(episode.filename),
-                summary=episode.remark,
-                publication_date=pubdate
-            )
+        p = Podcast(
+            name=programinfo.name,
+            subtitle=programinfo.subtitle,
+            description=programinfo.description,
+            website=feed_url(programid),  # programinfo.website,
+            explicit=programinfo.explicit,
+            category=Category(programinfo.category),
+            authors=[globalsettings.owner],
+            language=programinfo.language,
+            owner=globalsettings.owner,
+            feed_url=feed_url(programid),
+            new_feed_url=feed_url(programid),
+            image=programinfo.image_url,
         )
 
-    # send it as unicode
-    rss = u'%s' % p
-    return HttpResponse(rss, content_type='application/xml')
+        for episode in podcasts:
+            # Get pubdate from createdate or broadcastdate
+            pubdate = digas2pubdate(episode.createdate,
+                                    episode.broadcastdate)
+
+            if pubdate > timezone.now():
+                continue
+
+            # Add the episode to the list
+            p.episodes.append(
+                Episode(
+                    title=episode.title,
+                    media=Media(mp3url(episode.filename), episode.filesize),
+                    link=mp3url(episode.filename),  # multifeedreader uses this.
+                    id=guid(episode.filename),
+                    summary=episode.remark,
+                    publication_date=pubdate
+                )
+            )
+
+        # send it as unicode
+        rss = u'%s' % p
+        return HttpResponse(rss, content_type='application/xml')
+    except Exception as e:
+        return HttpResponse(status=500, body=str(e))

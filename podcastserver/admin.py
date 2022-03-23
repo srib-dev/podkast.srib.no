@@ -12,7 +12,7 @@ from django.conf import settings
 
 
 # Register your models here.
-admin.site.register(Person)
+# admin.site.register(Person)
 admin.site.register(ProgramInfo)
 
 if settings.MANAGE_DIGAS_DB == True:
