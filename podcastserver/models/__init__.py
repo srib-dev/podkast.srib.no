@@ -12,3 +12,5 @@ work with them.
 from .digasmodels import Definition, DigasPodcast
 # podcastserver app models
 from .podcastmodels import Person, ProgramInfo
+
+from .globalsettings import *

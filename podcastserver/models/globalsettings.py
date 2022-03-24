@@ -13,11 +13,11 @@
     https://django-constance.readthedocs.io/en/latest/
 """
 
-from constance import config
+# from constance import config
 from podgen import Person
 
-owner = Person(name=config.OWNER_NAME,
-               email=config.OWNER_EMAIL)
+owner = Person(name='Studentradioen i Bergen',
+               email='kontakt@srib.no')
 """ Standard eier til podcastene.
 
 Blir sendt til itunes via rss feeden.

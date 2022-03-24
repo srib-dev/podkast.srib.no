@@ -5,7 +5,7 @@ Podcast publication server for Studentradioen i Bergen
 
 ## Hvordan systemet er skrudd sammen
 
-Podkastjeneren bruker python. Det består av webrammeverket Django  og et podkast rss bibliotek som Radio Revolt har laget, (podgen).
+Podkastjeneren bruker python. Det består av webrammeverket Django og et podkast rss bibliotek (podgen) som Radio Revolt har laget.
 
 ## Setup:
 Disse stegene utføres for å sette opp et lokalt utviklingsmiljø for podkastserveren. I.e det du må gjøre for å få ting opp og kjørende, lokalt.
@@ -48,7 +48,96 @@ For å kunne komme inn på podkastsidene lokalt bruker vi djangos innebygde http
 2. Gå til http://localhost:8000 i nettleseren. ;D"
 
 
-## Hello World Django
+# Kjøre serveren i produksjon:
 
-Om django er nytt for deg kjør gjennom en tutorial herifra fra start til slutt - så lærer du fort og i en fei!
-[Start med Django](https://www.djangoproject.com/start/)
+For å kjøre i produksjon må du koble deg opp mot to mysql databaser. En for podcast programmet og en tilkobling til Digas databasen.
+
+Man må og koble seg opp mot NAS'et hvor alle mediafilene ligger lagret. Dette gjøres typisk i Ubuntu med kommandoen `sudo mount -vvv -w -t nfs xxx.xx.x.xxx:/NAS /home/fribyte/srib-nas-mount/NAS`. Da blir alle filene på NAS-en tilgjengelig i ubuntu filsystemet. Deretter må man gjøre denne mappen tilgjengelig for docker containeren ved en mount som dette: `docker run --name srib-podcast -d --restart=always -p 80:80 --mount type=bind,source=/home/fribyte/srib-nas-mount/NAS/digasLydfiler/podcast,target=/media/podcast,readonly srib-podcast`.
+
+Eksempel på `podkast/settings.py` for prod:
+
+```
+from .base_settings import *
+
+BASE_URL = "http://dts.podtrac.com/redirect.mp3/podcast.srib.no"
+STATIC_ROOT = '/var/www/podcast.srib.no/www/static'
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = 'En-eller-annen-secret'
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = False
+ADMIN_ENABLED = True
+INTERNAL_IPS = ['127.0.0.1']
+# for debug toolbar
+
+#ALLOWED_HOSTS = ['staging.podcast.srib.no', 'podcast.srib.no']
+
+
+# https://docs.djangoproject.com/en/1.11/ref/settings/#databases
+DATABASES = {
+    # Read Write for podcast programinfo
+    'default': {
+         'ENGINE': 'django.db.backends.mysql',
+         'NAME': 'srib_podcast_live',
+         'USER': 'srib-radio-vm',
+         'PASSWORD': 'super-duper-passord',
+         'HOST': 'db.fribyte.uib.no',
+         'PORT': '3306',
+    },
+
+     # Read only on Digas database
+     'digas': {
+         'ENGINE': 'django.db.backends.mysql',
+         'USER': 'srib-radio-vm',
+         'PASSWORD': 'super-duper-passord',
+         'NAME': 'digas',
+         'HOST': 'db.fribyte.uib.no',
+         'PORT': '3306',
+     }
+}
+
+"""
+        WARNING:  never set MANAGE_DIGAS_DB to True if
+                  the `digas` database is set to the real
+                  mysql digas database. It can potentially
+                  delete the tables!
+
+        What this does is that it will let django manage the
+        life cycle of the tables belonging to the models
+        for podcasts and definitions in the digasmodels file.
+
+        These models maps the Digas DB tables PODCAST and DEFINITION.
+        Real data, straight from digas. So we don't want django to
+        delete and create these tables if we run `python manage.py migrate`.
+
+        It's only safe to set this to true if you use a fake digas database (
+        i.e a localhost mysql server for development or a sqlite file).
+"""
+MANAGE_DIGAS_DB = False
+```
+
+Denne dockerfilen kan så kjøres opp med en docker-compose:
+
+```yaml
+version: '3'
+services:
+ srib-podcast:
+  container_name: srib-podcast
+  image: git.fribyte.no:5050/fribyte/ctf:podcast-srib-nginx
+  restart: always
+  volumes:
+   - type: bind
+     source: /home/fribyte/srib-nas-mount/NAS/digasLydfiler/podcast
+     target: /media/podcast
+     read_only: true
+  networks:
+   - azuracast_frontend
+  environment:
+   - VIRTUAL_HOST=podcast.srib.no
+   - LETSENCRYPT_HOST=podcast.srib.no
+
+networks:
+ azuracast_frontend:
+  external: true
+```
