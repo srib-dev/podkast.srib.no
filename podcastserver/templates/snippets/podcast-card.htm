@@ -1,6 +1,6 @@
 <div class="grid-btn-card">
     <h2 class="my-3"> {{ program.name }} </h2>
-    <img class="program-image" src="{{ program.image_url }}" alt="{{program.name}}" title="{{program.name}}">
+    <img class="program-image" loading="lazy" src="{{ program.image_url }}" alt="{{program.name}}" title="{{program.name}}">
     
     <a href="{% url 'rssfeed' program.programid %}" class="btn btn-secondary my-2">
         <i class="fa fa-rss " aria-hidden="true"></i> RSS
@@ -16,5 +16,3 @@
         <p> {{ program.description }} </p>    
     </div>
 </div>
-        
-        
