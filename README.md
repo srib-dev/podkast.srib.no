@@ -117,27 +117,34 @@ DATABASES = {
 MANAGE_DIGAS_DB = False
 ```
 
-Denne dockerfilen kan så kjøres opp med en docker-compose:
+## Generere docker image:
+
+Kjør `docker build -t srib-podcast .` fra root mappen til git repoet etter at du har endret på settings filen. Dette vil lage et docker image lokalt på maskinen som kan brukes i docker-compose filen i neste steg.
+
+TODO:
+- [ ] Dockerfile og Python kode som støtter å sette viktige settings.py som environment variabler i docker-compose istedenfor å måtte sette de i kildekode.
+
+Denne dockerfilen kan så kjøres opp med en docker-compose med kommandoen `docker-compoe up -d` (denne filen forutsetter at du har satt opp en nginx-proxy i en annen docker compose som eksponerer nettverket `frontend`):
 
 ```yaml
 version: '3'
 services:
  srib-podcast:
   container_name: srib-podcast
-  image: git.fribyte.no:5050/fribyte/ctf:podcast-srib-nginx
+  image: srib-podcast
   restart: always
   volumes:
    - type: bind
-     source: /home/fribyte/srib-nas-mount/NAS/digasLydfiler/podcast
+     source: /home/fribyte/srib-nas-mount/digasLydfiler/podcast
      target: /media/podcast
      read_only: true
   networks:
-   - azuracast_frontend
+   - frontend
   environment:
    - VIRTUAL_HOST=podcast.srib.no
    - LETSENCRYPT_HOST=podcast.srib.no
 
 networks:
- azuracast_frontend:
+ frontend:
   external: true
 ```
