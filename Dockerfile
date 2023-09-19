@@ -2,7 +2,7 @@ FROM python:3.9-slim
 RUN apt-get update && apt-get -y install --no-install-recommends \
     default-libmysqlclient-dev build-essential \
     python3-lxml libxml2-dev libxslt-dev \
-    python-dev \
+    python3-dev \
     nginx \
   && rm -rf /var/lib/apt/lists/*
 
@@ -21,3 +21,4 @@ RUN mkdir /media & mkdir /media/podcast # Mount the NAS media files to this fold
 
 EXPOSE 80
 CMD ["bash", "./start.sh"]
+
