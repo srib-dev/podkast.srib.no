@@ -6,7 +6,7 @@
  */
 
 img.program-image {
-    width: 100%
+    width: 100%;
 }
 
 
@@ -43,9 +43,6 @@ body {
             font-weight: normal;
             font-style: normal;
         }
-
-     
-
 
         #content {
             max-width: 800px;
@@ -110,9 +107,6 @@ body {
             text-align: left;
         }
 
-
-    /* @TODO: put this in -> admin.css  - JSolsvik 07.10.17 */
-    /* @DONE: its in podcast.css instead. since we reuse it.  - Robin 20.10.17 */
     .grid-wrapper {   
         display: grid; 
         grid-template-columns: repeat(8, 1fr);   

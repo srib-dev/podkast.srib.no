@@ -1,4 +1,4 @@
-{% extends 'base.htm' %}
+{% extends 'base.html' %}
 {% load static %}
 <!-- template: index.htm -->
 
@@ -6,7 +6,7 @@
 
     {% for program in programs %}
         <!-- Snippets ligger i template mappen --> 
-        {% include "snippets/podcast-card.htm" with program=program %}
+        {% include "snippets/podcast-card.html" with program=program %}
     {% endfor %}
 
 {% endblock %}

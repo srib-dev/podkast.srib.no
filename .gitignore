@@ -67,3 +67,6 @@ env
 
 # osx
 .DS_Store
+
+# virtual environments
+podkast/

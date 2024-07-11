@@ -12,20 +12,20 @@ def srib_admin(request):
 
     if request.user.is_authenticated:
         programs = ProgramInfo.objects.all()
-        return render(request, 'admin.htm', dict(programs=programs))
+        return render(request, 'admin.html', dict(programs=programs))
     else:
         return render(request, 'registration/login.html')
 
 
 def teknisksjef(request):
     i = request.GET["i"]
-    return render(request, 'sjef.htm', dict(i=i))
+    return render(request, 'sjef.html', dict(i=i))
 
 
 def index(request):
     # Henter ut kun programmer som har publish satt til True.
     publiserte_programmer = ProgramInfo.objects.filter(publish=True)
-    return render(request, 'index.htm', dict(programs=publiserte_programmer))
+    return render(request, 'index.html', dict(programs=publiserte_programmer))
 
 
 def definitions(request):
@@ -33,7 +33,7 @@ def definitions(request):
     Should be some.
     """
     definitions = Definition.objects.using('digas').all()
-    return render(request, 'definitions.htm', dict(definitions=definitions))
+    return render(request, 'definitions.html', dict(definitions=definitions))
 
 
 def thumbnail(request, programid):
