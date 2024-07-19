@@ -13,7 +13,10 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url, include
+from django.conf.urls import include
+
+from django.urls import path
+
 from django.conf import settings
 from django.contrib import admin
 
@@ -22,13 +25,13 @@ from podcastserver.views import rssfeed, definitions, index, srib_admin, teknisk
 
 # Step 2. Route urls to the view function
 urlpatterns = [
-    url(r'^defs', definitions),
-    url(r'^feed/(\d+)', rssfeed, name='rssfeed'),
-    url(r'^thumbnail/(\d+)', thumbnail, name='thumbnail'),
-    url(r'^$', index, name='index'),
-    url(r'^admin', srib_admin, name='srib_admin'),
-    url(r'^sjef', teknisksjef, name='teknisksjef'),
-    url(r'^accounts/', include('django.contrib.auth.urls')),
+    path('defs', definitions),
+    path('feed/<int:programid>', rssfeed, name='rssfeed'),
+    path('thumbnail/<int:programid>', thumbnail, name='thumbnail'),
+    path('', index, name='index'),
+    path('admin', srib_admin, name='srib_admin'),
+    path('sjef', teknisksjef, name='teknisksjef'),
+    path('accounts/', include('django.contrib.auth.urls')),
 
 ]
 
@@ -42,12 +45,12 @@ urlpatterns = [
 # if turned off, no urls to the admin pages or the debug toolbar is added.
 if settings.ADMIN_ENABLED:
         urlpatterns = [
-            url(r'^djangoadmin/', admin.site.urls),
+            path('djangoadmin/', admin.site.urls),
         ] + urlpatterns
 
 
 if settings.DEBUG:
     import debug_toolbar
     urlpatterns = [
-        url(r'^__debug__/', include(debug_toolbar.urls)),
+        path('__debug__/', include(debug_toolbar.urls)),
     ] + urlpatterns

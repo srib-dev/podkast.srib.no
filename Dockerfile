@@ -8,8 +8,8 @@ RUN apt-get update && apt-get -y install --no-install-recommends \
 
 COPY requirements_prod.txt requirements_prod.txt
 
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
 RUN pip install -r requirements_prod.txt
 

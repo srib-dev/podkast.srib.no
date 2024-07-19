@@ -70,3 +70,6 @@ env
 
 # virtual environments
 podkast/
+
+# environment
+*.env
