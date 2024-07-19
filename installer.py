@@ -11,7 +11,7 @@ import subprocess
 import django
 
 # Forteller hvor django finner settingsene for podkastprosjektet.
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "podkast.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings.__init__")
 django.setup()
 
 

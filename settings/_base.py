@@ -15,18 +15,18 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import os
 import sys
 from podgen import Person
-
+from dotenv import load_dotenv
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'h)a11b^x61y)(sqzsootokuqf@ip25vw-v+*9=pypm9r+$9ee='
-
-
+load_dotenv(os.path.join(BASE_DIR, '.env'))
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 ###################################################
 #
@@ -155,7 +155,7 @@ MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
-ROOT_URLCONF = 'podkast.urls'
+ROOT_URLCONF = 'podcastserver.urls'
 
 TEMPLATES = [
     {
@@ -225,6 +225,7 @@ if 'test' in sys.argv:
 """
 MANAGE_DIGAS_DB = False
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
