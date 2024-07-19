@@ -1,0 +1,30 @@
+name: Build and deploy Python app to Azure Web App - nordicusv-survey
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+  
+  # For when triggering it manually
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Login to Docker Hub
+        run: docker login -u fribyte -p ${{ secrets.FRIBYTE_DOCKER_PASSWORD }}
+
+      - name: Build Docker image
+        run: docker build -f Dockerfile -t fribyte/srib-podcast:latest \
+            --build-arg ENVIRONMENT="Production" \
+            --build-arg SECRET_KEY=${{ secrets.SECRET_KEY }} \
+            --build-arg DIGAS_DB_PASSWORD=${{ secrets.DIGAS_DB_PASSWORD }} \
+            --build-arg PROGRAMINFO_DB_PASSWORD=${{ secrets.PROGRAMINFO_DB_PASSWORD }} .
+
+      - name: Push image to Docker Hub
+        run: docker push fribyte/srib-podcast:latest

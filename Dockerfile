@@ -8,8 +8,21 @@ RUN apt-get update && apt-get -y install --no-install-recommends \
 
 COPY requirements_prod.txt requirements_prod.txt
 
+# variables receiving build argument values
+ARG SECRET_KEY
+ARG FRIBYTE_DOCKER_PASSWORD
+ARG DIGAS_DB_PASSWORD
+ARG PROGRAMINFO_DB_PASSWORD
+
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
+
+# secret keys and passwords from github action secrets
+# variables with $-sign is the build argument variables
+ENV SECRET_KEY=$SECRET_KEY
+ENV FRIBYTE_DOCKER_PASSWORD=$FRIBYTE_DOCKER_PASSWORD
+ENV DIGAS_DB_PASSWORD=$DIGAS_DB_PASSWORD
+ENV PROGRAMINFO_DB_PASSWORD=$PROGRAMINFO_DB_PASSWORD
 
 RUN pip install -r requirements_prod.txt
 
