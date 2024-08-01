@@ -21,10 +21,7 @@ jobs:
 
       - name: Build Docker image
         run: docker build -f Dockerfile -t fribyte/srib-podcast:latest \
-            --build-arg ENVIRONMENT="Production" \
-            --build-arg SECRET_KEY=${{ secrets.SECRET_KEY }} \
-            --build-arg DIGAS_DB_PASSWORD=${{ secrets.DIGAS_DB_PASSWORD }} \
-            --build-arg PROGRAMINFO_DB_PASSWORD=${{ secrets.PROGRAMINFO_DB_PASSWORD }} .
+            --build-arg ENVIRONMENT="Production" .
 
       - name: Push image to Docker Hub
         run: docker push fribyte/srib-podcast:latest

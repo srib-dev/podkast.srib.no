@@ -10,42 +10,23 @@ Podkastjeneren bruker python. Det består av webrammeverket Django og et podkast
 ## Setup:
 Disse stegene utføres for å sette opp et lokalt utviklingsmiljø for podkastserveren. I.e det du må gjøre for å få ting opp og kjørende, lokalt.
 
-Før du kjører listen her bør du ha på plass **Python, Pip og Virtualenvwrapper**. 
+Før du kjører listen her bør du ha på plass **Python og pip**. Samt **Docker**, om du ønsker å kjøre koden i en docker container. 
 
-Hvordan ha de på plass? sjekk her: [Sette opp Python](./docs/Sette-opp-Python.md)
-
-
+Hvordan ha de på plass? sjekk her: [Sette opp Python](./docs/Sette-opp-Python.md) og [Sette opp Docker](https://docs.docker.com/engine/install/)
 
 1. ```git clone https://github.com/srib-dev/podkast.srib.no```
-2. lag virtualenv: ```mkvirtualenv podkast```
+2. lag virtualenv: ```python -m venv podkast```
+3. installer følgende system-pakker:
+  - 
 3. Installer dependencies: ```pip install -r requirements_dev.txt```
-4. lag ny fil `settings.py` i mappen `podkast` med følgende innhold:
-
-```python
-# -*- coding: utf-8 -*-
-
-from .base_settings import *
-# Gjør kun dette lokalt på egen pc. 
-# Når vi jobber med en lokal juksedatabase.
-# Aldri på den ekte digas databasen...
-MANAGE_DIGAS_DB = True
-
-# Django admin side flyttet til: http://localhost:8000/djangoadmin
-# (vi har hijacket /admin til eget bruk.)
-ADMIN_ENABLED = True
-
-# Nyttig når vi utvikler lokalt. Ikke på den ekte servern.
-DEBUG = True
-
-```
-5. Kjør ```python installer.py```
+4. Kjør ```python installer.py```
 
 
 # Start serveren (lokalt)
 For å kunne komme inn på podkastsidene lokalt bruker vi djangos innebygde httpserver. Da kjører den på din maskin, og vil kun være synlig og tilgjengelig for deg.
 
 1. ```python manage.py runserver```
-2. Gå til http://localhost:8000 i nettleseren. ;D"
+2. Gå til http://localhost:8000 i nettleseren. ;D
 
 
 # Kjøre serveren i produksjon:
