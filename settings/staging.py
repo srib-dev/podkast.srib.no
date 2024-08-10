@@ -1,7 +1,6 @@
 from ._base import *
 
 BASE_URL = "http://dts.podtrac.com/redirect.mp3/podcast.srib.no"
-STATIC_ROOT = '/var/www/podcast.srib.no/www/static'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
