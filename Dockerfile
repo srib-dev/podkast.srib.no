@@ -1,29 +1,42 @@
-FROM python:3.9-slim
+FROM python:3.12-slim
+
 RUN apt-get update && apt-get -y install --no-install-recommends \
-    default-libmysqlclient-dev build-essential \
-    python3-lxml libxml2-dev libxslt-dev \
-    python3-dev \
+    default-libmysqlclient-dev \
+    build-essential \
+    libxml2-dev \
+    libxslt-dev \
     nginx \
-  && rm -rf /var/lib/apt/lists/*
+    pkg-config \
+    && rm -rf /var/lib/apt/lists/*
 
-COPY requirements_prod.txt requirements_prod.txt
+# Create and set the working directory
+WORKDIR /app
 
-# set build arguments
+# Copy only the requirements file first to leverage Docker cache
+COPY requirements_prod.txt .
+
+# Set build arguments
 ARG ENVIRONMENT
 
 # Set environment variables
-ENV ENVIRONMENT=$ENVIRONMENT
+ENV ENVIRON=$ENVIRONMENT
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-RUN pip install -r requirements_prod.txt
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements_prod.txt
 
+# Copy the rest of the application code
 COPY . .
 
+# Copy Nginx configuration
 COPY nginx.conf /etc/nginx/nginx.conf
 
-RUN mkdir /media & mkdir /media/podcast # Mount the NAS media files to this folder
+# Create media directories
+RUN mkdir -p /media/podcast
 
+# Expose port 80
 EXPOSE 80
-CMD ["bash", "./start.sh"]
 
+# Start the application
+CMD ["bash", "./start.sh"]
