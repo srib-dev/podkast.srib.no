@@ -148,7 +148,7 @@ body {
 
     .grid-btn-card { 
         border: 1px solid #e2e2e2;
-        //background-color: #8e8e8e;
+        background-color: #8e8e8e;
         grid-column: span 4;
         grid-row: span 2; 
     }
