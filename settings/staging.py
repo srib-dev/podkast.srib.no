@@ -9,7 +9,7 @@ ADMIN_ENABLED = True
 INTERNAL_IPS = ['127.0.0.1']
 # for debug toolbar
 
-ALLOWED_HOSTS = ['staging.podcast.srib.no', 'podcast.srib.no']
+#ALLOWED_HOSTS = ['testcast.srib.no', 'podcast.srib.no']
 
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 DATABASES = {
@@ -18,7 +18,7 @@ DATABASES = {
          'ENGINE': 'django.db.backends.mysql',
          'NAME': 'srib_podcast_live',
          'USER': 'srib-radio-vm',
-         'PASSWORD': os.environ.get('PODCAST_DB_PASSWORD'),
+         'PASSWORD': os.environ.get('PROGRAMINFO_DB_PASSWORD'),
          'HOST': 'db.fribyte.no',
          'PORT': '3306',
     },

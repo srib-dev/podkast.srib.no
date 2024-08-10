@@ -270,4 +270,12 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
-ALLOWED_HOSTS = ['staging.podcast.srib.no', 'podcast.srib.no', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['testcast.srib.no', 'podcast.srib.no', 'localhost', '127.0.0.1']
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost',
+    'http://127.0.0.1',
+    'https://localhost',
+    'https://127.0.0.1',
+    'https://testcast.srib.no',
+    'https://www.testcast.srib.no',
+]

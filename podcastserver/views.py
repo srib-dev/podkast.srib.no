@@ -5,8 +5,7 @@ from podgen import Podcast, Episode, Media, Category, Person
 from .util import mp3url, digas2pubdate, guid, feed_url
 from django.conf import settings
 from django.utils import timezone
-
-
+import settings as sett
 def srib_admin(request):
     # Henter ut alle podcastprogrammer
 
